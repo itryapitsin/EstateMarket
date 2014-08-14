@@ -1,0 +1,55 @@
+﻿<div class="row space1" ng-show="realtyType == 'lands'">
+    <div class="col-lg-12">
+        <label>Площадь от</label>
+        <select style="width: 100%; height: 30px;" ng-model="minSquare">
+            <option value="">Неважно</option>
+            <option value="_2">2</option>
+            <option value="_4">4</option>
+            <option value="_6">6</option>
+            <option value="_8">8</option>
+            <option value="_10">10</option>
+            <option value="_15">15</option>
+            <option value="_20">20</option>
+            <option value="_30">30</option>
+            <option value="_50">50</option>
+            <option value="_100">100</option>
+            <option value="_200">200</option>
+            <option value="_500">500</option>
+            <option value="_1000">1000</option>
+        </select>
+    </div>
+</div>
+
+<div class="row space1" ng-show="realtyType == 'lands'">
+    <div class="col-lg-12">
+        <label>Площадь до</label>
+        <select style="width: 100%; height: 30px;" ng-model="maxSquare">
+            <option value="">Неважно</option>
+            <option value="_2">2</option>
+            <option value="_4">4</option>
+            <option value="_6">6</option>
+            <option value="_8">8</option>
+            <option value="_10">10</option>
+            <option value="_15">15</option>
+            <option value="_20">20</option>
+            <option value="_30">30</option>
+            <option value="_50">50</option>
+            <option value="_100">100</option>
+            <option value="_200">200</option>
+            <option value="_500">500</option>
+            <option value="_1000">1000</option>
+            <option value="moreThat1000">1000</option>
+        </select>
+    </div>
+</div>
+
+<div class="row space1" ng-show="realtyType == 'lands'">
+    <div class="col-lg-12">
+        <label>Расположение</label>
+        <select style="width: 100%; height: 30px;" ng-model="location">
+            <option value="">Неважно</option>
+            <option value="city">В черте города</option>
+            <option value="countryside">За городом</option>
+        </select>
+    </div>
+</div>

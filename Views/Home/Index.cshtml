@@ -1,0 +1,116 @@
+﻿@section head
+{   
+    @Html.Partial("Links\\_Jquery")
+    @Html.Partial("Links\\_Angular")
+    @Html.Partial("Links\\_AngularRoute")
+    @Html.Partial("Links\\_AngularStrap")
+    @Html.Partial("Links\\_Bootstrap")
+    @Html.Partial("Links\\_Select2")
+    @Html.Partial("Links\\_Moment")
+
+    <link rel="stylesheet" href="/content/site.css" />
+    <link rel="stylesheet" href="/content/common.css" />
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+    <script src="/scripts/jquery.inputmask.js"></script>
+    <script src="/scripts/jquery.inputmask-multi.js"></script>
+
+    <script src="/scripts/loadMap.js"></script>
+    <script src="/scripts/darkMapPallete.js"></script>
+    <script src="/scripts/lightMapPallete.js"></script>
+    <script src="/scripts/map.js"></script>
+    <script src="/scripts/angular-file-upload.js"></script>
+    <script src="/scripts/app/directives/inputmask.js"></script>
+    <script src="/scripts/app/app.js"></script>
+    <script src="/scripts/app/controllers/baseController.js"></script>
+    <script src="/scripts/app/controllers/indexController.js"></script>
+}
+
+<div ng-controller="IndexController">
+    <div id="mapSidebar" class="nav"></div>
+    <div id="mapContainer"></div>
+
+    <div class="hidden-print hidden-xs hidden-sm affix well well-sm sidebar col-lg-2 dark-white" role="complementary" ng-show="isShowFilter"  ng-animate="{show:'animate-show', hide:'animate-hide'}">
+        <div class="row space1">
+            <div class="col-lg-12 text-right">
+                <i class="glyphicon glyphicon-eye-close" ng-click="hideFilter()" style="cursor: pointer;"></i>
+            </div>
+        </div>
+        <div class="row space1">
+            <div class="col-lg-12">
+                <label>Тип недвижимости</label>
+                <select style="width: 100%; height: 30px;" ng-model="realtyType">
+                    <option value="">Все</option>
+                    <option value="rooms">Комнаты</option>
+                    <option value="apartments">Квартиры</option>
+                    <option value="house">Дома, дачи, коттеджи</option>
+                    <option value="lands">Земельные участки</option>
+                    <option value="garage">Гаражи и машиноместа</option>
+                    <option value="commercials">Коммерческая недвижимость</option>
+                </select>
+            </div>
+        </div>
+        <div class="row space1">
+            <div class="col-lg-12">
+                <label>Тип объявления</label>
+                <select style="width: 100%; height: 30px;" ng-model="advertType">
+                    <option value="">Все</option>
+                    <option value="sell">Продам</option>
+                    <option value="rent">Сдам</option>
+                </select>
+            </div>
+        </div>
+        
+        @Html.Partial("_RoomFilter")
+        @Html.Partial("_ApartmentFilter")
+        @Html.Partial("_HouseFilter")
+        @Html.Partial("_LandFilter")
+        @Html.Partial("_GarageFilter")
+        @Html.Partial("_CommercialFilter")
+        
+        <div class="row space1" ng-show="isRoomOrApartments()">
+            <div class="col-lg-12">
+                <label>Этаж</label>
+                <select style="width: 100%; height: 30px;" ng-model="stageNum">
+                    <option value="">Неважно</option>
+                    <option value="notFirst">Не первый</option>
+                    <option value="notLast">Не последний</option>
+                    <option value="notFirstAndNotLast">Не первый и не последний</option>
+                </select>
+            </div>
+        </div>
+        <div class="row space1" ng-show="isRoomOrApartments()">
+            <div class="col-lg-12">
+                <label>Этажей в доме</label>
+                <select style="width: 100%; height: 30px;" ng-model="stageCount">
+                    <option value="">Неважно</option>
+                    <option value="lessThat5">меньше 5</option>
+                    <option value="from5to8">от 5 до 8</option>
+                    <option value="from9to12">от 9 до 12</option>
+                    <option value="from13to16">от 13 до 16</option>
+                    <option value="from17to25">от 17 до 25</option>
+                    <option value="moreThat25">более 25</option>
+                </select>
+            </div>
+        </div>
+        
+        @Html.Partial("_CostFilter")
+       
+        <div class="row space1">
+            <div class="col-lg-12">
+                <label>
+                    <input type="checkbox" ng-model="onlyWithPhoto"/> Только с фото
+                </label>
+            </div>
+        </div>
+        <div class="row space1">
+            <div class="col-lg-12">
+                <button class="btn btn-success" ng-click="search($event)" data-loading-text="Поиск..." style="width:100%;">Показать</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-toggle" ng-click="showFilter()" ng-hide="isShowFilter" ng-animate="{show:'animate-show', hide:'animate-hide'}">
+        <a href="#" class="sidebar-toggle"></a>
+    </div>
+</div>
