@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    var mycity = {
+    window.mycity = {
         marker: null,
         staticMarkers: [],
         map: null,
@@ -353,16 +353,16 @@
         },
         mapURL: 'http://api.tiles.mapbox.com/v3/madeinmurmansk.map-d56tfjcd.jsonp',
         enableWAX: true,
-        markerIcon: '/images/marker.png',
-        markerShadowIcon: '/images/marker.shadow.png',
-        markerDeleteIcon: '/images/marker.delete.png',
-        markerDragIcon: '/images/marker.png',
+        //markerIcon: '/images/marker.png',
+        //markerShadowIcon: '/images/marker.shadow.png',
+        //markerDeleteIcon: '/images/marker.delete.png',
+        //markerDragIcon: '/images/marker.png',
         markerIconNoVotes: mycity.config.markerIconPreset.noVotes, // ???
         markerIconFresh: mycity.config.markerIconPreset.fresh, // ???
 
-        markerStaticShadowIcon: '/images/marker.shadow.png',
-        markersURL: '/f2/mycity/markers.json',
-        markerSaveURL: '/f2/mycity/markers/save.json',
+        //markerStaticShadowIcon: '/images/marker.shadow.png',
+        //markersURL: '/f2/mycity/markers.json',
+        //markerSaveURL: '/f2/mycity/markers/save.json',
         markerPlacedCallback: function (marker) {
            
         },

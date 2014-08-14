@@ -1,5 +1,5 @@
-﻿app.controller("IndexController", ['$scope', '$q', '$timeout', '$http', '$modal',
-    function ($scope, $q, $timeout, $http, $modal) {
+﻿app.controller("IndexController", ['$scope', '$q', '$window', '$http', '$modal',
+    function ($scope, $q, $window, $http, $modal) {
 
         moment.lang('ru');
         $scope.moment = moment;
@@ -23,13 +23,24 @@
         $scope.search = function(event) {
             $(event.toElement).button('loading');
             $http
-                .get("http://vivalapetroskoi.ru/f2/mycity/markers.json", {
+                .get("/scripts/markers.js", {
                     params: {
                         
                     }
                 })
-                .success(function() {
-                    
+                .success(function(data) {
+                    try {
+                        for (var i in data[0]['markers/marker']) {
+                            var staticMarker = $window.mycity.placeStaticMarker($window.mycity.map,
+                                                                      data[0]['markers/marker'][i]['latitude'],
+                                                                      data[0]['markers/marker'][i]['longitude'],
+                                                                      data[0]['markers/marker'][i]['location'],
+                                                                      data[0]['markers/marker'][i]);
+                        }
+                    }
+                    catch (e) {
+                        console.log(e);
+                    }
                 })
                 .then(function() {
                     $(event.toElement).button('reset');
