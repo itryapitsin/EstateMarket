@@ -18,17 +18,18 @@
     <script src="/scripts/loadMap.js"></script>
     <script src="/scripts/darkMapPallete.js"></script>
     <script src="/scripts/lightMapPallete.js"></script>
-    <script src="/scripts/map.js"></script>
+    @*<script src="/scripts/map.js"></script>*@
     <script src="/scripts/angular-file-upload.js"></script>
-    <script src="/scripts/app/directives/inputmask.js"></script>
     <script src="/scripts/app/app.js"></script>
+    <script src="/scripts/app/directives/inputmask.js"></script>
+    <script src="/scripts/app/directives/gmap.js"></script>
     <script src="/scripts/app/controllers/baseController.js"></script>
     <script src="/scripts/app/controllers/indexController.js"></script>
 }
 
 <div ng-controller="IndexController">
     <div id="mapSidebar" class="nav"></div>
-    <div id="mapContainer"></div>
+    <div id="mapContainer" ng-gmap="mycity"></div>
 
     <div class="hidden-print hidden-xs hidden-sm affix well well-sm sidebar col-lg-2 dark-white" role="complementary" ng-show="isShowFilter"  ng-animate="{show:'animate-show', hide:'animate-hide'}">
         <div class="row space1">

@@ -95,10 +95,10 @@
             this.overlay = new google.maps.OverlayView();
             this.overlay.draw = function () { };
             this.overlay.setMap(mycity.map);
-            //google.maps.event.addListener(mycity.map, 'dblclick', function (event) {
-            //    window.clearTimeout(mycity.clickTimeout);
-            //    mycity.clickTimeout = null;
-            //});
+            google.maps.event.addListener(mycity.map, 'click', function (event) {
+                window.clearTimeout(mycity.clickTimeout);
+                mycity.clickTimeout = null;
+            });
             //google.maps.event.addListener(mycity.map, 'drag', function (event) {
             //    mycity.mapDragging = true;
             //});
