@@ -188,7 +188,6 @@
     <Content Include="Scripts\app\directives\ymap.js" />
     <Content Include="Scripts\app\filters\telephone.js" />
     <Content Include="Scripts\app\tmpls\ngstrap.tabs.js" />
-    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\darkMapPallete.js" />
     <Content Include="Scripts\from.js" />
     <Content Include="Scripts\jquery.inputmask-multi.js" />
@@ -200,7 +199,6 @@
     <Content Include="Scripts\jquery.inputmask.regex.extensions.js" />
     <Content Include="Scripts\lightMapPallete.js" />
     <Content Include="Scripts\loadMap.js" />
-    <Content Include="Scripts\map.js" />
     <Content Include="Scripts\markers.js" />
     <Content Include="Scripts\phone-codes\readme.txt" />
     <Content Include="Scripts\_references.js" />

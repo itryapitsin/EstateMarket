@@ -28,22 +28,28 @@
             },
             mapURL: 'http://api.tiles.mapbox.com/v3/madeinmurmansk.map-d56tfjcd.jsonp',
             enableWAX: false,
-            //markerIcon: '/images/marker.png',
-            //markerShadowIcon: '/images/marker.shadow.png',
-            //markerDeleteIcon: '/images/marker.delete.png',
-            //markerDragIcon: '/images/marker.png',
+            markerIcon: '/images/marker.png',
+            markerShadowIcon: '/images/marker.shadow.png',
+            markerDeleteIcon: '/images/marker.delete.png',
+            markerDragIcon: '/images/marker.png',
             //markerIconNoVotes: this.config.markerIconPreset.noVotes, // ???
             //markerIconFresh: scope.gmap.config.markerIconPreset.fresh, // ???
 
-            //markerStaticShadowIcon: '/images/marker.shadow.png',
-            //markersURL: '/f2/mycity/markers.json',
+            markerStaticShadowIcon: '/images/marker.shadow.png',
+            markersURL: '/markers',
             //markerSaveURL: '/f2/mycity/markers/save.json',
             markerPlacedCallback: function(marker) {
 
             },
             clickStaticMarkerCallback: function(marker) {
-                document.location.hash = 'markerID:' + marker.mycity.markerID;
+                document.location.hash = 'markerID:' + marker.extData.id;
                 scope.gmap.dialogDisplayed = true;
+            },
+            initMarkers: function (url, map, callback) {
+                loadMarkers()
+                    .then(function (r) {
+                        callback(scope.gmap.staticMarkers);
+                    });
             },
             staticMarkersInitDoneCallback: function(markers) {
                 if (document.location.hash.match(/#*markerID:([0-9+])/)) {
@@ -51,7 +57,7 @@
                         marker = null;
 
                     for (var i in markers) {
-                        if (markers[i].mycity.markerID == markerId) {
+                        if (markers[i].extData.id == markerId) {
                             marker = markers[i];
                             break;
                         }
@@ -63,14 +69,14 @@
                             marker.getPosition().lng()
                         ));
                         scope.gmap.map.panBy(240, 160);
-                        if (isDefined(scope.gmap.overlay.getProjection())) {
+                        if (angular.isDefined(scope.gmap.overlay.getProjection())) {
                             google.maps.event.trigger(marker, 'mouseup');
                         } else {
                             // can't catch overlay load event, so we do iterative checks
                             var
                                 attempts = 20,
                                 timeout = window.setInterval(function() {
-                                    if (isDefined(scope.gmap.overlay.getProjection())) {
+                                    if (angular.isDefined(scope.gmap.overlay.getProjection())) {
                                         google.maps.event.trigger(marker, 'mouseup');
                                         window.clearInterval(timeout);
                                     } else {
@@ -110,29 +116,41 @@
             if (event)
                 $(event.toElement).button('loading');
 
-            $http
-                .get("/scripts/markers.js", {
-                    params: {
-                        
-                    }
-                })
-                .success(function(data) {
-                    try {
-                        for (var i in data[0]['markers/marker']) {
-                            $scope.gmap.placeStaticMarker($scope.gmap.map,
-                                data[0]['markers/marker'][i]['latitude'],
-                                data[0]['markers/marker'][i]['longitude'],
-                                data[0]['markers/marker'][i]['location'],
-                                data[0]['markers/marker'][i]);
-                        }
-                    }
-                    catch (e) {
-                        console.log(e);
-                    }
-                })
+            loadMarkers()
                 .then(function () {
                     if (event)
                         $(event.toElement).button('reset');
             });
         };
+
+        function loadMarkers() {
+            var bounds = $scope.gmap.map.getBounds();
+
+            return $http
+                .get("/home/markers", {
+                    params: {
+                        fromLatitude: bounds.na.j,
+                        toLatitude: bounds.na.k,
+                        fromLongitude: bounds.va.k,
+                        toLongitude: bounds.va.j
+                    }
+                })
+                .success(function (data) {
+                    $scope.gmap.removeMarkers();
+
+                    try {
+                        for (var i in data) {
+                            $scope.gmap.placeStaticMarker(
+                                $scope.gmap.map,
+                                data[i]['latitude'],
+                                data[i]['longitude'],
+                                data[i]['location'],
+                                data[i]);
+                        }
+                    } catch (e) {
+                        console.log(e);
+                    }
+                });
+
+        }
     }]);
