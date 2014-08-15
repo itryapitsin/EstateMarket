@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using System;
+using RealtyStore.Infrastructure;
 using RealtyStore.Models;
 
 namespace RealtyStore

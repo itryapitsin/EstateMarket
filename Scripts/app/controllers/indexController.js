@@ -28,7 +28,7 @@
             },
             mapURL: 'http://api.tiles.mapbox.com/v3/madeinmurmansk.map-d56tfjcd.jsonp',
             enableWAX: false,
-            markerIcon: '/images/marker.png',
+            markerIcon: 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/48/Map-Marker-Marker-Outside-Pink.png',
             markerShadowIcon: '/images/marker.shadow.png',
             markerDeleteIcon: '/images/marker.delete.png',
             markerDragIcon: '/images/marker.png',
