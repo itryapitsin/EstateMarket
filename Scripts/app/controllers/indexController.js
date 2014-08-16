@@ -9,6 +9,9 @@
         if (google.loader.ClientLocation) {
             mapCenter = new google.maps.LatLng(google.loader.ClientLocation.latitude, google.loader.ClientLocation.longitude);
         }
+
+        var markerCluster;
+
         $scope.mycity = {
             mapOptions: {
                 center: new google.maps.LatLng(mapCenter.k, mapCenter.A),
@@ -19,7 +22,7 @@
                 streetViewControl: false,
                 scrollwheel: true,
                 panControl: false,
-                minZoom: 9,
+                minZoom: 5,
                 maxZoom: 20,
                 zoomControlOptions: {
                     style: google.maps.ZoomControlStyle.LARGE,
@@ -28,7 +31,8 @@
             },
             mapURL: 'http://api.tiles.mapbox.com/v3/madeinmurmansk.map-d56tfjcd.jsonp',
             enableWAX: false,
-            markerIcon: 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/48/Map-Marker-Marker-Outside-Pink.png',
+            //markerIcon: 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/48/Map-Marker-Marker-Outside-Pink.png',
+            markerIcon: '/images/marker.png',
             markerShadowIcon: '/images/marker.shadow.png',
             markerDeleteIcon: '/images/marker.delete.png',
             markerDragIcon: '/images/marker.png',
@@ -38,8 +42,21 @@
             markerStaticShadowIcon: '/images/marker.shadow.png',
             markersURL: '/markers',
             //markerSaveURL: '/f2/mycity/markers/save.json',
-            markerPlacedCallback: function(marker) {
 
+            afterInitMap: function (map) {
+                var mcOptions = {
+                    styles: [{
+                        height: 80,
+                        url: "/images/marker.png",
+                        width: 48,
+                        textColor: 'black',
+                        anchorText: [-40, 0],
+                    }]
+                }
+                markerCluster = new MarkerClusterer(map, [], mcOptions);
+            },
+            markerPlacedCallback: function(marker) {
+                
             },
             clickStaticMarkerCallback: function(marker) {
                 document.location.hash = 'markerID:' + marker.extData.id;
@@ -88,6 +105,7 @@
                         }
                     }
                 }
+
                 return null;
             }
         };
@@ -127,7 +145,7 @@
             var bounds = $scope.gmap.map.getBounds();
 
             return $http
-                .get("/home/markers", {
+                .get("/scripts/markers.js", {
                     params: {
                         fromLatitude: bounds.na.j,
                         toLatitude: bounds.na.k,
@@ -136,21 +154,27 @@
                     }
                 })
                 .success(function (data) {
-                    $scope.gmap.removeMarkers();
-
+                    
+                    markerCluster.clearMarkers();
                     try {
+                        
                         for (var i in data) {
-                            $scope.gmap.placeStaticMarker(
+                            var marker = $scope.gmap.createStaticMarker(
                                 $scope.gmap.map,
                                 data[i]['latitude'],
                                 data[i]['longitude'],
                                 data[i]['location'],
                                 data[i]);
+
+                            markerCluster.addMarker(marker);
                         }
+
+                       
+                    
                     } catch (e) {
                         console.log(e);
                     }
-                });
+            });
 
         }
     }]);

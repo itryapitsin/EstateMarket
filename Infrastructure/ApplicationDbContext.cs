@@ -1,5 +1,7 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using Microsoft.AspNet.Identity.EntityFramework;
+using RealtyStore.Infrastructure.Specifications;
 using RealtyStore.Models;
 using RealtyStore.Models.Business;
 
@@ -8,6 +10,11 @@ namespace RealtyStore.Infrastructure
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
     {
         public ApplicationDbContext(): base("DefaultConnection") {}
+
+        public IQueryable<T> SelectSatisfying<T>(Specification<T> specification) where T: class 
+        {
+            return Set<T>().Where(specification.IsSatisfied());
+        }
 
         public static ApplicationDbContext Create()
         {
@@ -58,6 +65,16 @@ namespace RealtyStore.Infrastructure
                 .IsRequired();
 
             base.OnModelCreating(modelBuilder);
+        }
+    }
+
+    public static class QueryableExtention
+    {
+        public static IQueryable<T> SelectSatisfying<T>(
+            this IQueryable<T> set, 
+            Specification<T> specification) where T : class
+        {
+            return set.Where(specification.IsSatisfied());
         }
     }
 }

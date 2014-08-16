@@ -5,7 +5,7 @@ using System.Web;
 
 namespace RealtyStore.Models.Business
 {
-    public enum FloorCountType
+    public enum FloorCountFilter
     {
         LessThat5,
         From5To8,

@@ -106,6 +106,9 @@
                         if(scope.onDragEnd)
                             scope.onDragEnd(event);
                     });
+
+                    if (config.afterInitMap)
+                        config.afterInitMap(scope.gmap.map);
                     
                     return scope.gmap.map;
                 },
@@ -173,9 +176,15 @@
                 },
 
                 placeStaticMarker: function (map, latitude, longitude, location, extData) {
+                    var staticMarker = this.createStaticMarker(map, latitude, longitude, location, extData);
+
+                    scope.gmap.staticMarkers.push(staticMarker);
+                    return staticMarker;
+                },
+
+                createStaticMarker: function (map, latitude, longitude, location, extData) {
                     var staticMarker = new google.maps.Marker({
                         position: new google.maps.LatLng(latitude, longitude),
-                        map: map,
                         //icon: scope.gmap.config.markerIconPreset.noVotes,
                         icon: scope.gmap.config.markerIcon,
                         draggable: false,
@@ -209,7 +218,7 @@
                         staticMarker.setZIndex(10);
                         //staticMarker.setIcon(scope.gmap.config.markerIconPreset.onFire);
                     }
-                    scope.gmap.staticMarkers.push(staticMarker);
+
                     return staticMarker;
                 },
 
@@ -248,7 +257,10 @@
             };
             
             var map = scope.gmap.initMap(config);
+//            var markerCluster = new MarkerClusterer(scope.gmap.map, scope.gmap.staticMarkers);
+
             scope.gmap.removeMarkers = function () {
+                //markerCluster.clearMarkers();
                 angular.forEach(scope.gmap.staticMarkers, function(marker) {
                     marker.setMap(null);
                 });

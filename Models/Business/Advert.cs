@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace RealtyStore.Models.Business
 {
@@ -11,6 +12,8 @@ namespace RealtyStore.Models.Business
         public AdvertType AdvertType { get; set; }
 
         public DateTime CreatedTime { get; set; }
+
+        public ICollection<FileMetaData> FilesMetaData { get; set; }
 
         public float Cost { get; set; }
 

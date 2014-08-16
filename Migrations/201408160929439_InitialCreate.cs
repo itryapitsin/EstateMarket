@@ -3,7 +3,7 @@ namespace RealtyStore.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitalCreate : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -34,10 +34,13 @@ namespace RealtyStore.Migrations
                         UserId = c.String(maxLength: 128),
                         Type = c.Int(nullable: false),
                         HostName = c.String(),
+                        Advert_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId)
-                .Index(t => t.UserId);
+                .ForeignKey("dbo.Adverts", t => t.Advert_Id)
+                .Index(t => t.UserId)
+                .Index(t => t.Advert_Id);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -116,6 +119,7 @@ namespace RealtyStore.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.FileMetaDatas", "Advert_Id", "dbo.Adverts");
             DropForeignKey("dbo.FileMetaDatas", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
@@ -126,6 +130,7 @@ namespace RealtyStore.Migrations
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.FileMetaDatas", new[] { "Advert_Id" });
             DropIndex("dbo.FileMetaDatas", new[] { "UserId" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");

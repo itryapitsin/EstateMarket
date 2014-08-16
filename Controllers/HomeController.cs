@@ -4,15 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RealtyStore.Infrastructure;
+using RealtyStore.Infrastructure.Services;
+using RealtyStore.Infrastructure.Specifications;
 using RealtyStore.Models;
 using RealtyStore.Models.Business;
-using Filter = RealtyStore.Models.Business.Filter;
+using RealtyStore.Models.Requests;
 
 namespace RealtyStore.Controllers
 {
     public class HomeController : Controller
     {
-        protected ApplicationDbContext Context = new ApplicationDbContext();
+        protected AdvertService AdvertService = new AdvertService();
 
         public ActionResult Index()
         {
@@ -20,13 +22,9 @@ namespace RealtyStore.Controllers
         }
 
         //[Route("markers")]
-        public ActionResult Markers(double fromLatitude, double fromLongitude, double toLatitude, double toLongitude)
+        public ActionResult Markers(AdvertFilter model)
         {
-
-            var result = Context.Adverts
-                .OfType<Room>()
-                .Where(x => Filter.CheckFloor(x, FloorFilterType.NotFirst))
-                .ToList();
+            var result = AdvertService.GetAdverts(model);
 
             var markers = new List<Marker>
             {
@@ -36,6 +34,26 @@ namespace RealtyStore.Controllers
                     Id = "1",
                     Latitude = 61.781956047148000000000000000000,
                     Longitude = 34.318993091583000000000000000000
+                },
+                new Marker
+                {
+                    CreatedTime = DateTime.Now,
+                    Id = "1",
+                    Latitude = 61.781946047148000000000000000000,
+                    Longitude = 34.318993091583000000000000000000
+                },
+                new Marker
+                {
+                    CreatedTime = DateTime.Now,
+                    Id = "1",
+                    Latitude = 61.781957047148000000000000000000,
+                    Longitude = 34.318993091583000000000000000000
+                },new Marker
+                {
+                    CreatedTime = DateTime.Now,
+                    Id = "1",
+                    Latitude = 61.781956047148000000000000000000,
+                    Longitude = 34.315992091583000000000000000000
                 }
             };
 
