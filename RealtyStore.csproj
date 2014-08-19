@@ -228,6 +228,7 @@
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\controllers\baseController.js" />
     <Content Include="Scripts\app\controllers\indexController.js" />
+    <Content Include="Scripts\app\controllers\newAdvertController.js" />
     <Content Include="Scripts\app\directives\inputmask.js" />
     <Content Include="Scripts\app\directives\gmap.js" />
     <Content Include="Scripts\app\directives\lazyYT.js" />
@@ -302,6 +303,9 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+    <Content Include="Views\Home\_AddAdvert.cshtml" />
+    <Content Include="Views\Home\_RealtyType.cshtml" />
+    <Content Include="Views\Home\_AdvertType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201408160929439_InitialCreate.resx">

@@ -24,39 +24,7 @@ namespace RealtyStore.Controllers
         //[Route("markers")]
         public ActionResult Markers(AdvertFilter model)
         {
-            var result = AdvertService.GetAdverts(model);
-
-            var markers = new List<Marker>
-            {
-                new Marker
-                {
-                    CreatedTime = DateTime.Now,
-                    Id = "1",
-                    Latitude = 61.781956047148000000000000000000,
-                    Longitude = 34.318993091583000000000000000000
-                },
-                new Marker
-                {
-                    CreatedTime = DateTime.Now,
-                    Id = "1",
-                    Latitude = 61.781946047148000000000000000000,
-                    Longitude = 34.318993091583000000000000000000
-                },
-                new Marker
-                {
-                    CreatedTime = DateTime.Now,
-                    Id = "1",
-                    Latitude = 61.781957047148000000000000000000,
-                    Longitude = 34.318993091583000000000000000000
-                },new Marker
-                {
-                    CreatedTime = DateTime.Now,
-                    Id = "1",
-                    Latitude = 61.781956047148000000000000000000,
-                    Longitude = 34.315992091583000000000000000000
-                }
-            };
-
+            var markers = AdvertService.GetAdverts(model);
             return new JsonNetResult(markers);
         }
 

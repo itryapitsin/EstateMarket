@@ -63,7 +63,7 @@ textarea {
     width: 100%;
 }
 
-.button,
+/*.button,
 [type="button"],
 [type="submit"] {
     background: #f8f8f8;
@@ -82,7 +82,7 @@ textarea {
     box-shadow:         0 1px 3px 0 rgba(0,0,0, .1);
     cursor: pointer;
     position: relative;
-}
+}*/
 
 a:focus,
 button:focus,
@@ -138,7 +138,7 @@ button.primary,
     text-decoration: none;
 }
 
-.close {
+/*.close {
     background: #d00;
     background:    -moz-linear-gradient(left, #a00 0%, #d00 50%);
     background:     -ms-linear-gradient(left, #a00 0%, #d00 50%);
@@ -174,7 +174,7 @@ button.primary,
     background: -webkit-linear-gradient(left, #a00 0%, #f00 50%);
     background:         linear-gradient(left, #a00 0%, #f00 50%);
     color: #fff !important;
-}
+}*/
 
 .loading {
     background: url('../images/loading.gif') center center no-repeat;

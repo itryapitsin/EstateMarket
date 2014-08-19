@@ -27,6 +27,7 @@
     <script src="/scripts/app/directives/gmap.js"></script>
     <script src="/scripts/app/controllers/baseController.js"></script>
     <script src="/scripts/app/controllers/indexController.js"></script>
+    <script src="/scripts/app/controllers/newAdvertController.js"></script>
 }
 
 <div ng-controller="IndexController">
@@ -39,31 +40,8 @@
                 <i class="glyphicon glyphicon-eye-close" ng-click="hideFilter()" style="cursor: pointer;"></i>
             </div>
         </div>
-        <div class="row space1">
-            <div class="col-lg-12">
-                <label>Тип недвижимости</label>
-                <select style="width: 100%; height: 30px;" ng-model="realtyType">
-                    <option value="">Все</option>
-                    <option value="rooms">Комнаты</option>
-                    <option value="apartments">Квартиры</option>
-                    <option value="house">Дома, дачи, коттеджи</option>
-                    <option value="lands">Земельные участки</option>
-                    <option value="garage">Гаражи и машиноместа</option>
-                    <option value="commercials">Коммерческая недвижимость</option>
-                </select>
-            </div>
-        </div>
-        <div class="row space1">
-            <div class="col-lg-12">
-                <label>Тип объявления</label>
-                <select style="width: 100%; height: 30px;" ng-model="advertType">
-                    <option value="">Все</option>
-                    <option value="sell">Продам</option>
-                    <option value="rent">Сдам</option>
-                </select>
-            </div>
-        </div>
-        
+        @Html.Partial("_RealtyType")
+        @Html.Partial("_AdvertType")
         @Html.Partial("_RoomFilter")
         @Html.Partial("_ApartmentFilter")
         @Html.Partial("_HouseFilter")
@@ -116,4 +94,10 @@
     <div class="sidebar-toggle" ng-click="showFilter()" ng-hide="isShowFilter" ng-animate="{show:'animate-show', hide:'animate-hide'}">
         <a href="#" class="sidebar-toggle"></a>
     </div>
+    
+    <button class="btn btn-warning affix" style="right: 33px; top: 7px;" data-toggle="modal" data-target="#NewAdvertModal">
+        Подать объявление
+    </button>
+    
+    @Html.Partial("_AddAdvert")
 </div>

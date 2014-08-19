@@ -1,9 +1,7 @@
 ﻿app.controller("IndexController", ['$scope', '$q', '$window', '$http', '$modal',
     function ($scope, $q, $window, $http, $modal) {
-
-        moment.lang('ru');
-        $scope.moment = moment;
-        var mapCenter = { k: 68.970500, A: 33.078000 };
+        
+        var mapCenter = { k: 61.783333, A: 34.35 };
         var scope = $scope;
 
         if (google.loader.ClientLocation) {
@@ -11,6 +9,9 @@
         }
 
         var markerCluster;
+
+        $scope.emptyAdvertType = "Все";
+        $scope.emptyRealtyType = "Неважно";
 
         $scope.mycity = {
             mapOptions: {
@@ -31,20 +32,16 @@
             },
             mapURL: 'http://api.tiles.mapbox.com/v3/madeinmurmansk.map-d56tfjcd.jsonp',
             enableWAX: false,
-            //markerIcon: 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/48/Map-Marker-Marker-Outside-Pink.png',
             markerIcon: '/images/marker.png',
             markerShadowIcon: '/images/marker.shadow.png',
             markerDeleteIcon: '/images/marker.delete.png',
             markerDragIcon: '/images/marker.png',
-            //markerIconNoVotes: this.config.markerIconPreset.noVotes, // ???
-            //markerIconFresh: scope.gmap.config.markerIconPreset.fresh, // ???
-
             markerStaticShadowIcon: '/images/marker.shadow.png',
             markersURL: '/markers',
-            //markerSaveURL: '/f2/mycity/markers/save.json',
 
             afterInitMap: function (map) {
                 var mcOptions = {
+                    gridSize: 200,
                     styles: [{
                         height: 80,
                         url: "/images/marker.png",
@@ -145,12 +142,13 @@
             var bounds = $scope.gmap.map.getBounds();
 
             return $http
-                .get("/scripts/markers.js", {
+                .get("/home/markers", {
                     params: {
                         fromLatitude: bounds.na.j,
                         toLatitude: bounds.na.k,
                         fromLongitude: bounds.va.k,
-                        toLongitude: bounds.va.j
+                        toLongitude: bounds.va.j,
+                        realtyType: $scope.realtyType
                     }
                 })
                 .success(function (data) {
