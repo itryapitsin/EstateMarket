@@ -1,4 +1,40 @@
-﻿
-<div class="modal-body" style="max-height: 500px; overflow: auto;" ng-show="step == 3">
-    Укажите адрес недвижимости
+﻿<div class="modal-body" style="max-height: 500px; overflow: auto;" ng-show="step == 3">
+    
+    @*<div class="row space2 text-center">
+        <div class="col-lg-12 space2" ng-show="showPhotoStepTitle()">
+            <h1 style="font-size: 44px"><i class="glyphicon glyphicon-camera"></i></h1>
+            <h3>&nbsp;Загрузите фотографию или две!</h3>
+            Или три или больше! Гости любят фотографии, на которых видны особенности вашей недвижимости.
+        </div>
+        <div class="col-lg-6 col-lg-offset-3">
+            <button class="btn btn-danger" ng-div-open-file="#file-uploader" ng-file-select>
+                <i class="glyphicon glyphicon-camera"></i>
+                &nbsp;Указать на карте
+            </button>
+        </div>
+
+        <input type="file" id="file-uploader" ng-file-select ng-hide="uploader.isHTML5" />
+    </div>*@
+    <div class="row space1">
+        <div class="col-lg-4">
+            <label>Страна</label>
+            <input type="text" style="width: 100%; height: 30px;" ng-model="country" placeholder="Укажите страну..." />
+        </div>
+        <div class="col-lg-4">
+            <label>Регион</label>
+            <input type="text" style="width: 100%; height: 30px;" ng-model="region" placeholder="Укажите регион..." />
+        </div>
+        <div class="col-lg-4" ng-hide="city">
+            <label>Район</label>
+            <input type="text" style="width: 100%; height: 30px;" ng-model="locality1" />
+        </div>
+        <div class="col-lg-4">
+            <label>Населённый пункт</label>
+            <input type="text" style="width: 100%; height: 30px;" ng-model="city" />
+        </div>
+        @*<div class="col-lg-4">
+            <label>Населённый пункт</label>
+            <input type="text" style="width: 100%; height: 30px;" ng-model="location" placeholder="Укажите населённый пункт..." />
+        </div>*@
+    </div>
 </div>

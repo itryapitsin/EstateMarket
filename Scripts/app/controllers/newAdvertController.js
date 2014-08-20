@@ -3,11 +3,55 @@
     function ($scope, $q, $window, $http, $modal, $fileUploader) {
         $scope.step = 1;
         $scope.stepCount = 3;
+        
+
+        google.maps.event.addListener($scope.gmap.map, 'dragend', function () {
+            var center = $scope.gmap.map.getCenter();
+
+            $http
+            .get("http://maps.googleapis.com/maps/api/geocode/json?latlng={0},{1}&sensor=false"
+                .replace("{0}", center.k)
+                .replace("{1}", center.A))
+            .success(function (response) {
+                var country = from(response.results)
+                    .where(function (item) {
+                        return item.types[0] == "country" && item.types[1] == "political";
+                    })
+                    .firstOrDefault();
+                var region = from(response.results)
+                    .where(function (item) {
+                        return item.types[0] == "administrative_area_level_1" && item.types[1] == "political";
+                    })
+                    .firstOrDefault();
+                var locality1 = from(response.results)
+                    .where(function (item) {
+                        return item.types[0] == "administrative_area_level_2" && item.types[1] == "political";
+                    })
+                    .firstOrDefault();
+                var city = from(response.results)
+                    .where(function (item) {
+                        return item.types[0] == "locality" && item.types[1] == "political";
+                    })
+                    .firstOrDefault();
+                $scope.country = country.address_components[0].long_name;
+                $scope.region = region.address_components[0].short_name;
+                $scope.locality1 = locality1.address_components[0].short_name;
+
+                if (city)
+                    $scope.city = city.address_components[0].short_name;
+                else
+                    delete $scope.city;
+            });
+        });
+
+        
 
         $scope.closeDialog = function() {
             $scope.realtyType = "";
             $scope.advertType = "";
+            $scope.cost = 0;
             $scope.step = 1;
+            $scope.uploader.queue = [];
         };
 
         $scope.isLastStep = function() {
@@ -24,6 +68,7 @@
 
         $scope.next = function() {
             $scope.step += 1;
+            
         };
 
         $scope.back = function () {
