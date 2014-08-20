@@ -1,0 +1,46 @@
+﻿<div class="modal-body" style="max-height: 500px; overflow: auto; text-align: center" ng-show="step == 2" ng-file-drop>
+    <div class="row space2">
+        <div class="col-lg-12 space2" ng-show="showPhotoStepTitle()">
+            <h1 style="font-size: 44px"><i class="glyphicon glyphicon-camera"></i></h1>
+            <h3>&nbsp;Загрузите фотографию или две!</h3>
+            Или три или больше! Гости любят фотографии, на которых видны особенности вашей недвижимости.
+        </div>
+        <div class="col-lg-6 col-lg-offset-3">
+            <button class="btn btn-danger" ng-div-open-file="#file-uploader" ng-file-select>
+                <i class="glyphicon glyphicon-camera"></i>
+                &nbsp;Загрузить фотографию
+            </button>
+        </div>
+
+        <input type="file" id="file-uploader" ng-file-select ng-hide="uploader.isHTML5" />
+    </div>
+    <div class="row">
+        <div ng-repeat="item in uploader.queue" class="col-lg-3 img">
+            <div class="thumbnail" ng-thumb="{ file: item.file, height: 100 }"></div>
+            <button class="btn btn-default delete" style="position: absolute; top: 2px; right: 17px; " ng-click="item.remove()">
+                <i class="glyphicon glyphicon-trash"></i>
+            </button>
+        </div>
+        @*<td ng-show="uploader.isHTML5">
+                <div class="progress" style="margin-bottom: 0;">
+                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }" style="width: 0%;"></div>
+                </div>
+            </td>
+            <td class="text-center">
+                <span ng-show="item.isSuccess" style="display: none;"><i class="glyphicon glyphicon-ok"></i></span>
+                <span ng-show="item.isCancel" style="display: none;"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                <span ng-show="item.isError" style="display: none;"><i class="glyphicon glyphicon-remove"></i></span>
+            </td>
+            <td nowrap="">
+                <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                    <span class="glyphicon glyphicon-upload"></span> Upload
+                </button>
+                <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading" disabled="disabled">
+                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                </button>
+                <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                    <span class="glyphicon glyphicon-trash"></span> Remove
+                </button>
+            </td>*@
+    </div>
+</div>

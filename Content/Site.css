@@ -12,6 +12,18 @@
     margin-bottom: 10px;
 }
 
+.space2 {
+    margin-bottom: 20px;
+}
+
+.delete {
+    display: none;
+}
+
+.img:hover .delete {
+    display: block;
+}
+
 .sidebar-toggle {
     background: rgba(0,0,0, .05);
     border-left: solid 1px rgba(0,0,0, .1);

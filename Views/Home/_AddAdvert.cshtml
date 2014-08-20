@@ -1,33 +1,35 @@
 ﻿<div class="modal fade" id="NewAdvertModal" ng-controller="NewAdvertController">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form>
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <button type="button" class="close" data-dismiss="modal" ng-click="closeDialog()">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
                     <h4 class="modal-title">Новое объявление</h4>
                 </div>
-                <div class="modal-body">
-                    @Html.Partial("_RealtyType")
-                    @Html.Partial("_AdvertType")
-                    @Html.Partial("_RoomFilter")
-                    @Html.Partial("_ApartmentFilter")
-                    @Html.Partial("_HouseFilter")
-                    @Html.Partial("_LandFilter")
-                    @Html.Partial("_GarageFilter")
-                    @Html.Partial("_CommercialFilter")
-                    <div class="row space1" ng-show="isRoomOrApartments(this)">
-                        <div class="col-lg-12">
-                            <label>Этажей в доме</label>
-                            <input type="text" style="width: 100%; height: 30px;" ng-model="stageCount"/>
-                        </div>
-                    </div>
-                </div>
+                @Html.Partial("AddAdvert/_Step1")
+                @Html.Partial("AddAdvert/_Step2")
+                @Html.Partial("AddAdvert/_Step3")
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeDialog()">
                         <span class="glyphicon glyphicon-ban-circle"></span>
                         Отмена
                     </button>
-                    <button type="button" class="btn btn-success">
+                    
+                    <button type="button" class="btn btn-default" ng-hide="isFirstStep()" ng-click="back()">
+                        <span class="glyphicon glyphicon-arrow-left"></span>
+                        Назад
+                    </button>
+
+                    <button type="button" class="btn btn-success" ng-hide="isLastStep()" ng-click="next()">
+                        <span class="glyphicon glyphicon-arrow-right"></span>
+                        Далее
+                    </button>
+
+                    <button type="button" class="btn btn-success" ng-show="isLastStep()" ng-click="publish()">
                         <span class="glyphicon glyphicon-ok-circle"></span>
                         OK
                     </button>

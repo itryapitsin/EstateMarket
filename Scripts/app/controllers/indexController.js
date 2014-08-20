@@ -115,12 +115,20 @@
             $scope.isShowFilter = false;
         };
 
-        $scope.isNotRoomOrApartments = function() {
+        $scope.isNotRoomOrApartments = function () {
             return $scope.realtyType != "rooms" && $scope.realtyType != "apartments";
         };
 
         $scope.isRoomOrApartments = function () {
             return !$scope.isNotRoomOrApartments();
+        };
+
+        $scope.isNotHousesOrLands = function () {
+            return $scope.realtyType != "houses" && $scope.realtyType != "lands";
+        };
+
+        $scope.isHousesOrLands = function () {
+            return !$scope.isNotHousesOrLands();
         };
 
         $scope.onDragEnd = function(e) {

@@ -24,6 +24,8 @@
     <script src="/scripts/angular-file-upload.js"></script>
     <script src="/scripts/app/app.js"></script>
     <script src="/scripts/app/directives/inputmask.js"></script>
+    <script src="/scripts/app/directives/ngDivOpenFile.js"></script>
+    <script src="/scripts/app/directives/ngthumbs.js"></script>
     <script src="/scripts/app/directives/gmap.js"></script>
     <script src="/scripts/app/controllers/baseController.js"></script>
     <script src="/scripts/app/controllers/indexController.js"></script>
@@ -45,7 +47,11 @@
         @Html.Partial("_RoomFilter")
         @Html.Partial("_ApartmentFilter")
         @Html.Partial("_HouseFilter")
+        @Html.Partial("_HouseSquareFilter")
         @Html.Partial("_LandFilter")
+        
+        @Html.Partial("_LocationFilter")
+
         @Html.Partial("_GarageFilter")
         @Html.Partial("_CommercialFilter")
         

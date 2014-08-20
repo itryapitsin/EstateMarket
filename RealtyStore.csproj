@@ -306,6 +306,16 @@
     <Content Include="Views\Home\_AddAdvert.cshtml" />
     <Content Include="Views\Home\_RealtyType.cshtml" />
     <Content Include="Views\Home\_AdvertType.cshtml" />
+    <Content Include="Views\Home\AddAdvert\_Cost.cshtml" />
+    <Content Include="Views\Home\AddAdvert\_Stage.cshtml" />
+    <Content Include="Views\Home\_HouseSquareFilter.cshtml" />
+    <Content Include="Views\Home\AddAdvert\_HouseSquare.cshtml" />
+    <Content Include="Views\Home\_LocationFilter.cshtml" />
+    <Content Include="Views\Home\AddAdvert\_LandSquare.cshtml" />
+    <Content Include="Views\Home\AddAdvert\_Description.cshtml" />
+    <Content Include="Views\Home\AddAdvert\_Step1.cshtml" />
+    <Content Include="Views\Home\AddAdvert\_Step2.cshtml" />
+    <Content Include="Views\Home\AddAdvert\_Step3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201408160929439_InitialCreate.resx">
