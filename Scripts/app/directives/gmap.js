@@ -138,6 +138,9 @@
                 },
 
                 placeMarker: function (location, callback) {
+                    if (scope.gmap.marker)
+                        scope.gmap.marker.setMap(null);
+
                     var marker = new google.maps.Marker({
                         position: location,
                         map: map,
@@ -167,6 +170,8 @@
                             icon: scope.gmap.config.markerIcon,
                         });
                     });
+
+                    scope.gmap.marker = marker;
                     return marker;
                 },
 

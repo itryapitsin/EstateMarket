@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="/content/site.css" />
     <link rel="stylesheet" href="/content/common.css" />
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    @*<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>*@
     <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/src/markerclusterer.js"></script>
 
     <script src="/scripts/jquery.inputmask.js"></script>
@@ -21,7 +20,6 @@
     <script src="/scripts/loadMap.js"></script>
     <script src="/scripts/darkMapPallete.js"></script>
     <script src="/scripts/lightMapPallete.js"></script>
-    @*<script src="/scripts/map.js"></script>*@
     <script src="/scripts/angular-file-upload.js"></script>
     <script src="/scripts/app/app.js"></script>
     <script src="/scripts/app/directives/inputmask.js"></script>
@@ -37,7 +35,7 @@
     <div id="mapSidebar" class="nav"></div>
     <div id="mapContainer" ng-gmap="mycity"></div>
 
-    <div class="hidden-print hidden-xs hidden-sm affix well well-sm sidebar col-lg-2 dark-white" role="complementary" ng-show="isShowFilter"  ng-animate="{show:'animate-show', hide:'animate-hide'}">
+    <div class="hidden-print hidden-xs hidden-sm affix well well-sm sidebar col-lg-2 dark-white" role="complementary" ng-show="isShowFilter && !isAddingAdvert" ng-animate="{show:'animate-show', hide:'animate-hide'}">
         <div class="row space1">
             <div class="col-lg-12 text-right">
                 <i class="glyphicon glyphicon-eye-close" ng-click="hideFilter()" style="cursor: pointer;"></i>
@@ -50,12 +48,12 @@
         @Html.Partial("_HouseFilter")
         @Html.Partial("_HouseSquareFilter")
         @Html.Partial("_LandFilter")
-        
+
         @Html.Partial("_LocationFilter")
 
         @Html.Partial("_GarageFilter")
         @Html.Partial("_CommercialFilter")
-        
+
         <div class="row space1" ng-show="isRoomOrApartments()">
             <div class="col-lg-12">
                 <label>Этаж</label>
@@ -81,13 +79,13 @@
                 </select>
             </div>
         </div>
-        
+
         @Html.Partial("_CostFilter")
-       
+
         <div class="row space1">
             <div class="col-lg-12">
                 <label>
-                    <input type="checkbox" ng-model="onlyWithPhoto"/> Только с фото
+                    <input type="checkbox" ng-model="onlyWithPhoto" /> Только с фото
                 </label>
             </div>
         </div>
@@ -98,11 +96,31 @@
         </div>
     </div>
 
-    <div class="sidebar-toggle" ng-click="showFilter()" ng-hide="isShowFilter" ng-animate="{show:'animate-show', hide:'animate-hide'}">
+    <div class="sidebar-toggle" ng-click="showFilter()" ng-hide="isShowFilter || isAddingAdvert" ng-animate="{show:'animate-show', hide:'animate-hide'}">
         <a href="#" class="sidebar-toggle"></a>
     </div>
     
-    <button class="btn btn-warning affix" style="right: 33px; top: 7px;" data-toggle="modal" data-target="#NewAdvertModal">
+    <div class="affix" style="right: 0; bottom: 7px; left: 0">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3 alert alert-info" ng-show="isAddingAdvert">
+                <div class="row">
+                    <div class="col-lg-8" style="margin-top: 10px;">
+                        <i class="glyphicon glyphicon-info-sign"></i> <strong>Укажите на карте расположение недвижимости</strong>
+                    </div>
+                    <div class="col-lg-4 text-right">
+                        <button class="btn btn-success" ng-click="cancelAddingAdvert()" ng-show="isAddingAdvert">
+                            OK
+                        </button>
+                        <button class="btn btn-default" ng-click="cancelAddingAdvert()" ng-show="isAddingAdvert">
+                            Отмена
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <button class="btn btn-warning affix" style="right: 33px; top: 7px;" ng-click="addAdvert()" ng-hide="isAddingAdvert">
         Подать объявление
     </button>
     

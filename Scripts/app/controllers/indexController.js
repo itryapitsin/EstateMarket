@@ -135,6 +135,30 @@
             $scope.search();
         };
 
+        $scope.addAdvert = function () {
+            google.maps.event.addListener($scope.gmap.map, 'click', function (location) {
+                $scope.gmap.placeMarker(location.latLng);
+            });
+            $scope.gmap.removeMarkers();
+            $scope.isAddingAdvert = true;
+            $scope.gmap.map.setOptions({
+                 draggableCursor: 'url(maps.gstatic.com/mapfiles/pointer_8_8.cur),default'
+            });
+        };
+
+        $scope.cancelAddingAdvert = function () {
+            if ($scope.gmap.marker)
+                $scope.gmap.marker.setMap(null);
+
+            google.maps.event.clearListeners($scope.gmap.map, 'click');
+
+            loadMarkers();
+            $scope.isAddingAdvert = false;
+            $scope.gmap.map.setOptions({
+                 draggableCursor: 'url(maps.gstatic.com/mapfiles/openhand_8_8.cur),default'
+            });
+        };
+
         $scope.search = function (event) {
             if (event)
                 $(event.toElement).button('loading');
