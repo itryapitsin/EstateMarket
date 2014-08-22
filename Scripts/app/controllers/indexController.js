@@ -1,5 +1,7 @@
-﻿app.controller("IndexController", ['$scope', '$q', '$window', '$http', '$modal',
-    function ($scope, $q, $window, $http, $modal) {
+﻿app.controller("IndexController", ['$scope', '$q', '$window', '$http', '$controller',
+    function ($scope, $q, $window, $http, $controller) {
+
+        $controller("BaseController", { $scope: $scope });
         
         var mapCenter = { k: 61.783333, A: 34.35 };
         var scope = $scope;
@@ -138,13 +140,16 @@
         $scope.addAdvert = function () {
             google.maps.event.addListener($scope.gmap.map, 'click', function (location) {
                 $scope.gmap.placeMarker(location.latLng);
+                $scope.isSelectedLocation = true;
             });
             $scope.gmap.removeMarkers();
             $scope.isAddingAdvert = true;
-            $scope.gmap.map.setOptions({
-                 draggableCursor: 'url(maps.gstatic.com/mapfiles/pointer_8_8.cur),default'
-            });
+            //$scope.gmap.map.setOptions({
+            //     draggableCursor: 'url(maps.gstatic.com/mapfiles/pointer_8_8.cur),default'
+            //});
         };
+
+        
 
         $scope.cancelAddingAdvert = function () {
             if ($scope.gmap.marker)
@@ -154,9 +159,19 @@
 
             loadMarkers();
             $scope.isAddingAdvert = false;
-            $scope.gmap.map.setOptions({
-                 draggableCursor: 'url(maps.gstatic.com/mapfiles/openhand_8_8.cur),default'
-            });
+            $scope.isSelectedLocation = false;
+            $scope.hideDialog();
+            //$scope.gmap.map.setOptions({
+            //     draggableCursor: 'url(maps.gstatic.com/mapfiles/openhand_8_8.cur),default'
+            //});
+        };
+
+        $scope.showNewAdvertDialog = function() {
+            $scope.showDialog('add-advert-dialog.html',
+                function() {
+
+                },
+                $scope.cancelAddingAdvert);
         };
 
         $scope.search = function (event) {
@@ -172,7 +187,6 @@
 
         function loadMarkers() {
             var bounds = $scope.gmap.map.getBounds();
-
             return $http
                 .get("/home/markers", {
                     params: {

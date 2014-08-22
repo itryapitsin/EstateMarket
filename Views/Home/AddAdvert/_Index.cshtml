@@ -1,7 +1,7 @@
-﻿<div class="modal fade" id="NewAdvertModal" ng-controller="NewAdvertController">
+﻿<div class="modal" id="NewAdvertModal" ng-controller="NewAdvertController">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form>
+            <form ng-submit="onSuccess()">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" ng-click="closeDialog()">
                         <span aria-hidden="true">&times;</span>
@@ -14,7 +14,7 @@
                 @Html.Partial("AddAdvert/_Step3")
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeDialog()">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="onCancel()">
                         <span class="glyphicon glyphicon-ban-circle"></span>
                         Отмена
                     </button>
@@ -29,7 +29,7 @@
                         Далее
                     </button>
 
-                    <button type="button" class="btn btn-success" ng-show="isLastStep()" ng-click="publish()">
+                    <button type="submit" class="btn btn-success" ng-show="isLastStep()">
                         <span class="glyphicon glyphicon-ok-circle"></span>
                         OK
                     </button>

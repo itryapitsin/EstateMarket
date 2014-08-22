@@ -108,10 +108,10 @@
                         <i class="glyphicon glyphicon-info-sign"></i> <strong>Укажите на карте расположение недвижимости</strong>
                     </div>
                     <div class="col-lg-4 text-right">
-                        <button class="btn btn-success" ng-click="cancelAddingAdvert()" ng-show="isAddingAdvert">
+                        <button class="btn btn-success" ng-click="showNewAdvertDialog()" ng-enabled="isSelectedLocation">
                             OK
                         </button>
-                        <button class="btn btn-default" ng-click="cancelAddingAdvert()" ng-show="isAddingAdvert">
+                        <button class="btn btn-default" ng-click="cancelAddingAdvert()">
                             Отмена
                         </button>
                     </div>
@@ -124,5 +124,7 @@
         Подать объявление
     </button>
     
-    @Html.Partial("_AddAdvert")
+    <script type="text/ng-template" id="add-advert-dialog.html">
+        @Html.Partial("AddAdvert/_Index")
+    </script>
 </div>

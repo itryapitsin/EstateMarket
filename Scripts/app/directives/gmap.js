@@ -267,8 +267,10 @@
             scope.gmap.removeMarkers = function () {
                 //markerCluster.clearMarkers();
                 angular.forEach(scope.gmap.staticMarkers, function(marker) {
-                    marker.setMap(null);
+                    config.removeMarker(marker);
                 });
+
+                scope.gmap.staticMarkers = [];
             };
 
             google.maps.event.addListenerOnce(map, 'idle', function () {
