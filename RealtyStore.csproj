@@ -316,6 +316,7 @@
     <Content Include="Views\Home\AddAdvert\_Step1.cshtml" />
     <Content Include="Views\Home\AddAdvert\_Step2.cshtml" />
     <Content Include="Views\Home\AddAdvert\_Step3.cshtml" />
+    <Content Include="Views\Shared\_Warning.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201408160929439_InitialCreate.resx">

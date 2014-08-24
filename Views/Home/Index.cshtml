@@ -1,5 +1,5 @@
 ﻿@section head
-{   
+{
     @Html.Partial("Links\\_Jquery")
     @Html.Partial("Links\\_Angular")
     @Html.Partial("Links\\_AngularRoute")
@@ -99,13 +99,31 @@
     <div class="sidebar-toggle" ng-click="showFilter()" ng-hide="isShowFilter || isAddingAdvert" ng-animate="{show:'animate-show', hide:'animate-hide'}">
         <a href="#" class="sidebar-toggle"></a>
     </div>
-    
+
     <div class="affix" style="right: 0; bottom: 7px; left: 0">
         <div class="row">
-            <div class="col-lg-6 col-lg-offset-3 alert alert-info" ng-show="isAddingAdvert">
+            <div class="col-lg-6 col-lg-offset-3 alert alert-info" ng-show="isAddingAdvert && !emptyLocation">
                 <div class="row">
                     <div class="col-lg-8" style="margin-top: 10px;">
-                        <i class="glyphicon glyphicon-info-sign"></i> <strong>Укажите на карте расположение недвижимости</strong>
+                        <i class="glyphicon glyphicon-info-sign"></i>
+                        <strong>Укажите на карте расположение недвижимости</strong>
+                    </div>
+                    <div class="col-lg-4 text-right">
+                        <button class="btn btn-success" ng-click="showNewAdvertDialog()" ng-enabled="isSelectedLocation">
+                            OK
+                        </button>
+                        <button class="btn btn-default" ng-click="cancelAddingAdvert()">
+                            Отмена
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-lg-offset-3 alert alert-danger" ng-show="isAddingAdvert && emptyLocation">
+                <div class="row">
+                    <div class="col-lg-8" style="margin-top: 10px;">
+                        <i class="glyphicon glyphicon-exclamation-sign"></i>
+                        <strong>Расположение не выбрано. Укажите расположение на карте.</strong>
                     </div>
                     <div class="col-lg-4 text-right">
                         <button class="btn btn-success" ng-click="showNewAdvertDialog()" ng-enabled="isSelectedLocation">
@@ -119,11 +137,10 @@
             </div>
         </div>
     </div>
-    
+
     <button class="btn btn-warning affix" style="right: 33px; top: 7px;" ng-click="addAdvert()" ng-hide="isAddingAdvert">
         Подать объявление
     </button>
-    
     <script type="text/ng-template" id="add-advert-dialog.html">
         @Html.Partial("AddAdvert/_Index")
     </script>
