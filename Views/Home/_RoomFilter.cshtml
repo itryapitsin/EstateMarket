@@ -1,17 +1,17 @@
 ﻿<div class="row space1" ng-show="realtyType == 'rooms'">
-    <div class="col-lg-12">
-        <label>Комнат в квартире</label>
-        <select style="width: 100%; height: 30px;">
+    <div class="col-lg-12" ng-class="{ 'has-warning': warnings['shouldSelectRoomsCount'] }">
+        <label class="control-label">Комнат в квартире</label>
+        <select style="width: 100%; height: 30px;" ng-model="roomsCount" class="form-control">
             <option value="">{{emptyRealtyType}}</option>
-            <option value="one">1</option>
-            <option value="two">2</option>
-            <option value="free">3</option>
-            <option value="four">4</option>
-            <option value="five">5</option>
-            <option value="six">6</option>
-            <option value="seven">7</option>
-            <option value="eight">8</option>
-            <option value="moreThatNine">более 9</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">более 9</option>
         </select>
     </div>
 </div>

@@ -3,7 +3,8 @@
     function ($scope, $q, $window, $http, $modal, $fileUploader) {
         $scope.step = 1;
         $scope.stepCount = 3;
-        
+        $scope.errors = {};
+        $scope.warnings = {};
 
         google.maps.event.addListener($scope.gmap.map, 'dragend', function () {
             var center = $scope.gmap.map.getCenter();
@@ -44,8 +45,6 @@
             });
         });
 
-        
-
         $scope.closeDialog = function() {
             $scope.realtyType = "";
             $scope.advertType = "";
@@ -66,9 +65,56 @@
 
         };
 
-        $scope.next = function() {
+        $scope.next = function () {
+            $scope["validateStep" + $scope.step]();
+
+            if (hasFields($scope.errors))
+                return;
+
             $scope.step += 1;
-            
+        };
+
+        $scope.validateStep1 = function () {
+            $scope.errors = {};
+            $scope.warnings = {};
+
+            if (!$scope.realtyType || $scope.realtyType == "")
+                $scope.errors["shouldSelectRealtyType"] = "Тип недвижимости должен быть указан";
+
+            if (!$scope.advertType || $scope.advertType == "")
+                $scope.errors["shouldSelectAdvertType"] = "Тип объявления должен быть указан";
+
+            switch ($scope.realtyType) {
+                case "rooms":
+                    if (!$scope.roomsCount || $scope.roomsCount == "")
+                        $scope.warnings["shouldSelectRoomsCount"] = "Укажите количество комнат в квартире";
+
+                    if (!$scope.stage || $scope.stage == "")
+                        $scope.warnings["shouldInputStage"] = "Укажите этаж";
+
+                    if (!$scope.stageCount || $scope.stageCount == "")
+                        $scope.warnings["shouldInputStagesCount"] = "Укажите количество этажей в доме";
+                    break;
+
+                case "apartments":
+                    if (!$scope.objectType || $scope.objectType == "")
+                        $scope.warnings["shouldInputObjectType"] = "Укажите тип объекта";
+
+                    if (!$scope.rooms || $scope.rooms == "")
+                        $scope.warnings["shouldInputRooms"] = "Укажите количество комнат";
+
+                    if (!$scope.stage || $scope.stage == "")
+                        $scope.warnings["shouldInputStage"] = "Укажите этаж";
+
+                    if (!$scope.stageCount || $scope.stageCount == "")
+                        $scope.warnings["shouldInputStagesCount"] = "Укажите количество этажей в доме";
+                    break;
+
+                default:
+            }
+
+            if (!$scope.cost || $scope.cost == "")
+                $scope.errors["shouldInputCost"] = "Укажите стоимость недвижимости";
         };
 
         $scope.back = function () {
@@ -109,5 +155,14 @@
 
         $scope.emptyRealtyType = "Неуказано";
         $scope.emptyAdvertType = "Неуказано";
+
+        function hasFields(obj) {
+            var count = 0;
+            for (var prop in obj) {
+                count++;
+            }
+            return count > 0;
+        };
+
     }
 ]);
