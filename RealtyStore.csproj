@@ -303,7 +303,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Views\Home\_AddAdvert.cshtml" />
+    <Content Include="Views\Home\AddAdvert\_Index.cshtml" />
     <Content Include="Views\Home\_RealtyType.cshtml" />
     <Content Include="Views\Home\_AdvertType.cshtml" />
     <Content Include="Views\Home\AddAdvert\_Cost.cshtml" />
