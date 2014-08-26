@@ -153,8 +153,9 @@
 
         $scope.cancelAddingAdvert = function () {
             if ($scope.gmap.marker)
-                $scope.gmap.marker.setMap(null);
+                $scope.gmap.removeMarker();
 
+            $scope.emptyLocation = false;
             google.maps.event.clearListeners($scope.gmap.map, 'click');
 
             loadMarkers();
@@ -166,7 +167,11 @@
             //});
         };
 
-        $scope.showNewAdvertDialog = function() {
+        $scope.showNewAdvertDialog = function () {
+            $scope.emptyLocation = !$scope.gmap.marker;
+            if ($scope.emptyLocation)
+                return;
+
             $scope.showDialog('add-advert-dialog.html',
                 function() {
 
