@@ -1,7 +1,7 @@
 ﻿<div class="row space1" ng-show="realtyType == 'lands'">
-    <div class="col-lg-12">
-        <label>Площадь участка</label>
-        <input type="text" style="width: 100%; height: 30px;" ng-model="sqaure" placeholder="Укажите площадь участка..."/>
+    <div class="col-lg-12" ng-class="{ 'has-warning': warnings['shouldInputSquare'] }">
+        <label class="control-label">Площадь участка</label>
+        <input class="form-control" type="text" style="width: 100%; height: 30px;" ng-model="sqaure" placeholder="Укажите площадь участка..." />
     </div>
 </div>
 

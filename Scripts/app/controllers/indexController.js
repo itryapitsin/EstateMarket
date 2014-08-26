@@ -14,6 +14,9 @@
 
         $scope.emptyAdvertType = "Все";
         $scope.emptyRealtyType = "Неважно";
+        $scope.emptyObjectType = "Неважно";
+        $scope.emptyGarageType = "Неважно";
+        $scope.emptySecurity = "Неважно";
 
         $scope.mycity = {
             mapOptions: {
@@ -176,7 +179,10 @@
                 function() {
 
                 },
-                $scope.cancelAddingAdvert);
+                $scope.cancelAddingAdvert,
+                function(s) {
+                    
+                });
         };
 
         $scope.search = function (event) {

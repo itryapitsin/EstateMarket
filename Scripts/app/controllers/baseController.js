@@ -4,7 +4,7 @@
         moment.lang('ru');
         $scope.moment = moment;
 
-        $scope.showDialog = function (templateUrl, onSuccess, onCancel) {
+        $scope.showDialog = function (templateUrl, onSuccess, onCancel, beforeShow) {
             var self = this;
 
             if (!onSuccess)
@@ -25,6 +25,9 @@
             $window.modalPromise = modalPromise;
 
             return modalPromise.$promise.then(function () {
+                if (beforeShow)
+                    beforeShow(self);
+
                 modalPromise.show();
                 $(".modal-backdrop").addClass("in");
             });

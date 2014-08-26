@@ -5,51 +5,13 @@
         $scope.stepCount = 3;
         $scope.errors = {};
         $scope.warnings = {};
-
-        google.maps.event.addListener($scope.gmap.map, 'dragend', function () {
-            var center = $scope.gmap.map.getCenter();
-
-            $http
-            .get("http://maps.googleapis.com/maps/api/geocode/json?latlng={0},{1}&sensor=false"
-                .replace("{0}", center.k)
-                .replace("{1}", center.A))
-            .success(function (response) {
-                var country = from(response.results)
-                    .where(function (item) {
-                        return item.types[0] == "country" && item.types[1] == "political";
-                    })
-                    .firstOrDefault();
-                var region = from(response.results)
-                    .where(function (item) {
-                        return item.types[0] == "administrative_area_level_1" && item.types[1] == "political";
-                    })
-                    .firstOrDefault();
-                var locality1 = from(response.results)
-                    .where(function (item) {
-                        return item.types[0] == "administrative_area_level_2" && item.types[1] == "political";
-                    })
-                    .firstOrDefault();
-                var city = from(response.results)
-                    .where(function (item) {
-                        return item.types[0] == "locality" && item.types[1] == "political";
-                    })
-                    .firstOrDefault();
-                $scope.country = country.address_components[0].long_name;
-                $scope.region = region.address_components[0].short_name;
-                $scope.locality1 = locality1.address_components[0].short_name;
-
-                if (city)
-                    $scope.city = city.address_components[0].short_name;
-                else
-                    delete $scope.city;
-            });
-        });
+        
 
         $scope.closeDialog = function() {
-            $scope.realtyType = "";
-            $scope.advertType = "";
-            $scope.cost = 0;
-            $scope.step = 1;
+            delete $scope.realtyType;
+            delete $scope.advertType;
+            delete $scope.cost;
+            delete $scope.step;
             $scope.uploader.queue = [];
         };
 
@@ -110,6 +72,33 @@
                         $scope.warnings["shouldInputStagesCount"] = "Укажите количество этажей в доме";
                     break;
 
+                case "houses":
+                    if (!$scope.objectType || $scope.objectType == "")
+                        $scope.errors["shouldInputObjectType"] = "Укажите тип объекта";
+
+                    if (!$scope.square || $scope.square == "")
+                        $scope.warnings["shouldInputSquare"] = "Укажите площадь дома";
+                    break;
+
+                case "lands":
+                    if (!$scope.square || $scope.square == "")
+                        $scope.warnings["shouldInputSquare"] = "Укажите площадь участка";
+                    break;
+
+                case "garages":
+                    if (!$scope.objectType || $scope.objectType == "")
+                        $scope.errors["shouldInputObjectType"] = "Укажите вид объекта";
+
+                    if (!$scope.security || $scope.security == "")
+                        $scope.warnings["shouldSelectSecurity"] = "Укажите имеется ли охрана";
+                    break;
+
+                case "commercials":
+                    if (!$scope.objectType || $scope.objectType == "")
+                        $scope.errors["shouldInputObjectType"] = "Укажите вид объекта";
+
+                    break;
+
                 default:
             }
 
@@ -155,6 +144,9 @@
 
         $scope.emptyRealtyType = "Неуказано";
         $scope.emptyAdvertType = "Неуказано";
+        $scope.emptyObjectType = "Неуказано";
+        $scope.emptyGarageType = "Неуказано";
+        $scope.emptySecurity = "Неуказано";
 
         function hasFields(obj) {
             var count = 0;
