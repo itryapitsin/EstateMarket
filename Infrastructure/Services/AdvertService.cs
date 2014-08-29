@@ -10,7 +10,7 @@ namespace RealtyStore.Infrastructure.Services
 {
     public class AdvertService
     {
-        protected ApplicationDbContext Context = new ApplicationDbContext();
+        public ApplicationDbContext Context = new ApplicationDbContext();
 
         public IEnumerable<Advert> GetAdverts(AdvertFilter model)
         {

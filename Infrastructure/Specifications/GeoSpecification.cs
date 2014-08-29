@@ -27,8 +27,8 @@ namespace RealtyStore.Infrastructure.Specifications
         {
             return advert => advert.Latitude > FromLatitude
                 && advert.Latitude < ToLatitude
-                && advert.Longtitude > FromLongitude
-                && advert.Longtitude < ToLongitude;
+                && advert.Longitude > FromLongitude
+                && advert.Longitude < ToLongitude;
         }
     }
 }

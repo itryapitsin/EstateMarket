@@ -13,7 +13,7 @@ namespace RealtyStore.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201408160929439_InitialCreate"; }
+            get { return "201408291144274_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

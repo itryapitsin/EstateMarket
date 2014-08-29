@@ -5,11 +5,11 @@ using System.Web;
 
 namespace RealtyStore.Models.Business
 {
-    public class Room: Apartment
+    public class Land: Advert
     {
-        public Room()
+        public Land()
         {
-            RealtyType = RealtyType.Rooms;
+            RealtyType = RealtyType.Lands;
         }
     }
 }

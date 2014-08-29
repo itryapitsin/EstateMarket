@@ -5,11 +5,13 @@ using System.Web;
 
 namespace RealtyStore.Models.Business
 {
-    public class Room: Apartment
+    public class Garage: TypedObject
     {
-        public Room()
+        public bool? HasSecurity { get; set; }
+
+        public Garage()
         {
-            RealtyType = RealtyType.Rooms;
+            RealtyType = RealtyType.Garages;
         }
     }
 }

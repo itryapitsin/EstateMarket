@@ -12,7 +12,7 @@ namespace RealtyStore.Models.Requests
         public AdvertType? AdvertType { get; set; }
         public FloorFilterType? FloorFilter { get; set; }
         public FloorCountFilter? FloorCountFilter { get; set; }
-        public int? RoomCountFilter { get; set; }
+        public RoomsCountType? RoomCountFilter { get; set; }
         public bool OnlyWithPhoto { get; set; }
         public double? MinCost { get; set; }
         public double? MaxCost { get; set; }

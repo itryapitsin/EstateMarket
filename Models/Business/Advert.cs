@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RealtyStore.Models.Business
 {
-    public class Advert
+    public abstract class Advert
     {
         public int Id { get; set; }
 
@@ -17,8 +17,12 @@ namespace RealtyStore.Models.Business
 
         public float Cost { get; set; }
 
+        public float Square { get; set; }
+
         public double Latitude { get; set; }
 
-        public double Longtitude { get; set; }
+        public double Longitude { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

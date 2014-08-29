@@ -46,7 +46,7 @@ namespace RealtyStore.Infrastructure
 
             modelBuilder
                 .Entity<Advert>()
-                .Property(x => x.Longtitude)
+                .Property(x => x.Longitude)
                 .IsRequired();
 
             modelBuilder
@@ -63,6 +63,35 @@ namespace RealtyStore.Infrastructure
                 .Entity<Advert>()
                 .Property(x => x.RealtyType)
                 .IsRequired();
+
+            modelBuilder
+                .Entity<Apartment>()
+                .ToTable("Apartments");
+
+            modelBuilder
+                .Entity<Commercial>()
+                .ToTable("Commercials");
+
+            modelBuilder
+                .Entity<Garage>()
+                .ToTable("Garages");
+
+            modelBuilder
+                .Entity<House>()
+                .ToTable("Houses");
+
+            modelBuilder
+                .Entity<Land>()
+                .ToTable("Lands");
+
+            modelBuilder
+                .Entity<Room>()
+                .Map(x =>
+                {
+                    x.MapInheritedProperties();
+                    x.ToTable("Rooms");
+                });
+                
 
             base.OnModelCreating(modelBuilder);
         }

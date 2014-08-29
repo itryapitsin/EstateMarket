@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Home.Web.Infrastructure;
 using RealtyStore.Infrastructure;
 using RealtyStore.Infrastructure.Services;
 using RealtyStore.Infrastructure.Specifications;
@@ -28,6 +30,15 @@ namespace RealtyStore.Controllers
             return new JsonNetResult(markers);
         }
 
-       
+        [HttpPost]
+        public ActionResult PublishNewAdvert([AbstractBind(ConcreteTypeParameter = "realtyType", Path = "RealtyStore.Models.Business")]Advert model)
+        {
+            model.CreatedTime = DateTime.UtcNow;
+
+            AdvertService.Context.Adverts.Add(model);
+            AdvertService.Context.SaveChanges();
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
     }
 }

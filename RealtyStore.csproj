@@ -165,6 +165,7 @@
     <Compile Include="Infrastructure\ApplicationRoleStore.cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\ApplicationUserStore.cs" />
+    <Compile Include="Infrastructure\AbstractBindAttribute.cs" />
     <Compile Include="Infrastructure\Services\AdvertService.cs" />
     <Compile Include="Infrastructure\Specifications\AdvertCostSpecification.cs" />
     <Compile Include="Infrastructure\Specifications\AdvertTypeSpecification.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Infrastructure\Robokassa\RobokassaConfirmationRequest.cs" />
     <Compile Include="Infrastructure\Robokassa\RobokassaMode.cs" />
     <Compile Include="Infrastructure\Robokassa\RobokassaQueryType.cs" />
+    <Compile Include="Infrastructure\StringExtensions.cs" />
     <Compile Include="Infrastructure\VkAuth\Constants.cs" />
     <Compile Include="Infrastructure\VkAuth\Provider\IVkAuthenticationProvider.cs" />
     <Compile Include="Infrastructure\VkAuth\Provider\VkAuthenticatedContext.cs" />
@@ -191,9 +193,9 @@
     <Compile Include="Infrastructure\VkAuth\VkAuthenticationMiddleware.cs" />
     <Compile Include="Infrastructure\VkAuth\VkAuthenticationOptions.cs" />
     <Compile Include="JsonNetResult.cs" />
-    <Compile Include="Migrations\201408160929439_InitialCreate.cs" />
-    <Compile Include="Migrations\201408160929439_InitialCreate.Designer.cs">
-      <DependentUpon>201408160929439_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201408291144274_InitialCreate.cs" />
+    <Compile Include="Migrations\201408291144274_InitialCreate.Designer.cs">
+      <DependentUpon>201408291144274_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -204,11 +206,18 @@
     <Compile Include="Models\ApplicationUserLogin.cs" />
     <Compile Include="Models\ApplicationUserRole.cs" />
     <Compile Include="Models\Business\AdvertType.cs" />
+    <Compile Include="Models\Business\Apartment.cs" />
+    <Compile Include="Models\Business\Commercial.cs" />
     <Compile Include="Models\Business\FloorCountFilter.cs" />
     <Compile Include="Models\Business\FloorFilterType.cs" />
+    <Compile Include="Models\Business\Garage.cs" />
+    <Compile Include="Models\Business\House.cs" />
+    <Compile Include="Models\Business\Land.cs" />
+    <Compile Include="Models\Business\ObjectType.cs" />
     <Compile Include="Models\Business\RealtyType.cs" />
     <Compile Include="Models\Business\Room.cs" />
     <Compile Include="Models\Business\RoomCountFilterType.cs" />
+    <Compile Include="Models\Business\TypedObject.cs" />
     <Compile Include="Models\CollectionResponse.cs" />
     <Compile Include="Models\FileMetaData.cs" />
     <Compile Include="Models\FileMetaDataType.cs" />
@@ -234,6 +243,7 @@
     <Content Include="Scripts\app\directives\lazyYT.js" />
     <Content Include="Scripts\app\directives\ngDivOpenFile.js" />
     <Content Include="Scripts\app\directives\ngthumbs.js" />
+    <Content Include="Scripts\app\directives\with.js" />
     <Content Include="Scripts\app\directives\ymap.js" />
     <Content Include="Scripts\app\filters\telephone.js" />
     <Content Include="Scripts\app\tmpls\ngstrap.tabs.js" />
@@ -319,8 +329,8 @@
     <Content Include="Views\Shared\_Warning.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201408160929439_InitialCreate.resx">
-      <DependentUpon>201408160929439_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201408291144274_InitialCreate.resx">
+      <DependentUpon>201408291144274_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

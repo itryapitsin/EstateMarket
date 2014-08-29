@@ -5,7 +5,7 @@ using System.Web;
 
 namespace RealtyStore.Models.Business
 {
-    public enum RoomCountFilterType
+    public enum RoomsCountType
     {
         One = 1,
         Two = 2,
@@ -15,6 +15,7 @@ namespace RealtyStore.Models.Business
         Six = 6,
         Seven = 7,
         Eight = 8,
-        MoreThatNine = 9
+        MoreThatNine = 9,
+        Studio = 10,
     }
 }

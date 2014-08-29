@@ -9,19 +9,19 @@ namespace RealtyStore.Infrastructure.Specifications
 {
     public class RoomCountSpecification: Specification<Room>
     {
-        private int? _roomCountFilter;
+        private RoomsCountType? _roomCountFilter;
 
-        public RoomCountSpecification(int? roomCount)
+        public RoomCountSpecification(RoomsCountType? roomCount)
         {
             _roomCountFilter = roomCount;
         }
 
         public override Expression<Func<Room, bool>> IsSatisfied()
         {
-            return room => !_roomCountFilter.HasValue || 
-                (_roomCountFilter.Value == 9 
-                ? room.RoomCount >= _roomCountFilter.Value
-                : room.RoomCount == _roomCountFilter.Value);
+            return room => !_roomCountFilter.HasValue ||
+                (_roomCountFilter == RoomsCountType.MoreThatNine 
+                    ? room.Rooms >= _roomCountFilter
+                    : room.Rooms == _roomCountFilter);
         }
     }
 }

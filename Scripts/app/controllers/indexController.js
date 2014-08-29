@@ -121,7 +121,7 @@
         };
 
         $scope.isNotRoomOrApartments = function () {
-            return $scope.realtyType != "rooms" && $scope.realtyType != "apartments";
+            return $scope.realtyType != "room" && $scope.realtyType != "apartment";
         };
 
         $scope.isRoomOrApartments = function () {
@@ -129,7 +129,7 @@
         };
 
         $scope.isNotHousesOrLands = function () {
-            return $scope.realtyType != "houses" && $scope.realtyType != "lands";
+            return $scope.realtyType != "house" && $scope.realtyType != "land";
         };
 
         $scope.isHousesOrLands = function () {
@@ -176,13 +176,31 @@
                 return;
 
             $scope.showDialog('add-advert-dialog.html',
-                function() {
+                function (s) {
+                    var advert = {
+                        latitude: $scope.gmap.marker.position.k,
+                        longitude: $scope.gmap.marker.position.A,
+                        realtyType: s.realtyType,
+                        advertType: s.advertType,
+                        cost: s.cost,
+                        description: s.description,
 
+                        floor: s.stage,
+                        floorCount: s.stageCount,
+                        rooms: s.roomsCount,
+
+                        objectType: s.objectType,
+
+                        square: s.square,
+                    };
+
+                    $http
+                        .post('/home/publishnewadvert', advert)
+                        .success(function(result) {
+                            $scope.cancelAddingAdvert();
+                        });
                 },
-                $scope.cancelAddingAdvert,
-                function(s) {
-                    
-                });
+                $scope.cancelAddingAdvert);
         };
 
         $scope.search = function (event) {
