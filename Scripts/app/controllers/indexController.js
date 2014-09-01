@@ -46,22 +46,24 @@
 
             afterInitMap: function (map) {
                 var mcOptions = {
-                    gridSize: 200,
-                    styles: [{
-                        height: 80,
-                        url: "/images/marker.png",
-                        width: 48,
-                        textColor: 'black',
-                        anchorText: [-40, 0],
-                    }]
-                }
+                    gridSize: 40,
+                    styles: [
+                        {
+                            height: 80,
+                            url: "/images/marker.png",
+                            width: 48,
+                            textColor: 'black',
+                            anchorText: [-40, 0],
+                        }
+                    ]
+                };
                 markerCluster = new MarkerClusterer(map, [], mcOptions);
             },
             markerPlacedCallback: function(marker) {
                 
             },
             clickStaticMarkerCallback: function(marker) {
-                document.location.hash = 'markerID:' + marker.extData.id;
+                //document.location.hash = 'markerID:' + marker.extData.id;
                 scope.gmap.dialogDisplayed = true;
             },
             initMarkers: function (url, map, callback) {
@@ -177,9 +179,12 @@
 
             $scope.showDialog('add-advert-dialog.html',
                 function (s) {
+                    s.loading = true;
+                    s.publishButtonLabel = "Добавление...";
+
                     var advert = {
-                        latitude: $scope.gmap.marker.position.k,
-                        longitude: $scope.gmap.marker.position.A,
+                        latitude: $scope.gmap.marker.position.A,
+                        longitude: $scope.gmap.marker.position.k,
                         realtyType: s.realtyType,
                         advertType: s.advertType,
                         cost: s.cost,
@@ -198,6 +203,13 @@
                         .post('/home/publishnewadvert', advert)
                         .success(function(result) {
                             $scope.cancelAddingAdvert();
+                            s.loading = false;
+                            s.publishButtonLabel = "Добавить";
+                        })
+                        .error(function () {
+                            s.message = "Возникла ошибка: неудалось добавить объявление";
+                            s.loading = false;
+                            s.publishButtonLabel = "Добавить";
                         });
                 },
                 $scope.cancelAddingAdvert);
@@ -214,6 +226,10 @@
             });
         };
 
+        $scope.$watch('realtyType', function() {
+            delete $scope.objectType;
+        });
+
         function loadMarkers() {
             var bounds = $scope.gmap.map.getBounds();
             return $http
@@ -223,7 +239,15 @@
                         toLatitude: bounds.na.k,
                         fromLongitude: bounds.va.k,
                         toLongitude: bounds.va.j,
-                        realtyType: $scope.realtyType
+
+                        realtyType: $scope.realtyType,
+                        objectType: $scope.objectType,
+                        roomCountFilter: $scope.roomsCount,
+                        floorFilter: $scope.stage,
+                        floorCountFilter: $scope.stageCount,
+
+                        squareMin: $scope.minSquare,
+                        squareMax: $scope.maxSquare,
                     }
                 })
                 .success(function (data) {
@@ -233,12 +257,11 @@
                         
                         for (var i in data) {
                             var marker = $scope.gmap.createStaticMarker(
-                                $scope.gmap.map,
-                                data[i]['latitude'],
                                 data[i]['longitude'],
+                                data[i]['latitude'],
                                 data[i]['location'],
                                 data[i]);
-
+                            $scope.gmap.staticMarkers.push(marker);
                             markerCluster.addMarker(marker);
                         }
 

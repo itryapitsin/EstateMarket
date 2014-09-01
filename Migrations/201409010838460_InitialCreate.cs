@@ -8,24 +8,6 @@ namespace RealtyStore.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Adverts",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        RealtyType = c.Int(nullable: false),
-                        AdvertType = c.Int(nullable: false),
-                        CreatedTime = c.DateTime(nullable: false),
-                        Cost = c.Single(nullable: false),
-                        Square = c.Single(nullable: false),
-                        Latitude = c.Double(nullable: false),
-                        Longitude = c.Double(nullable: false),
-                        IsActive = c.Boolean(nullable: false),
-                        ObjectType = c.Int(),
-                        Discriminator = c.String(maxLength: 128),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
                 "dbo.FileMetaDatas",
                 c => new
                     {
@@ -34,13 +16,11 @@ namespace RealtyStore.Migrations
                         UserId = c.String(maxLength: 128),
                         Type = c.Int(nullable: false),
                         HostName = c.String(),
-                        Advert_Id = c.Int(),
+                        Advert_Id = c.Guid(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId)
-                .ForeignKey("dbo.Adverts", t => t.Advert_Id)
-                .Index(t => t.UserId)
-                .Index(t => t.Advert_Id);
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -118,96 +98,126 @@ namespace RealtyStore.Migrations
                 "dbo.Apartments",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Guid(nullable: false),
+                        RealtyType = c.Int(nullable: false),
+                        AdvertType = c.Int(nullable: false),
+                        CreatedTime = c.DateTime(nullable: false),
+                        Cost = c.Single(nullable: false),
+                        Square = c.Single(nullable: false),
+                        Latitude = c.Double(nullable: false),
+                        Longitude = c.Double(nullable: false),
+                        IsActive = c.Boolean(nullable: false),
+                        ObjectType = c.Int(),
                         Rooms = c.Int(),
                         Floor = c.Int(),
                         FloorCount = c.Int(),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Adverts", t => t.Id)
-                .Index(t => t.Id);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Commercials",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Guid(nullable: false),
+                        RealtyType = c.Int(nullable: false),
+                        AdvertType = c.Int(nullable: false),
+                        CreatedTime = c.DateTime(nullable: false),
+                        Cost = c.Single(nullable: false),
+                        Square = c.Single(nullable: false),
+                        Latitude = c.Double(nullable: false),
+                        Longitude = c.Double(nullable: false),
+                        IsActive = c.Boolean(nullable: false),
+                        ObjectType = c.Int(),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Adverts", t => t.Id)
-                .Index(t => t.Id);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Garages",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Guid(nullable: false),
+                        RealtyType = c.Int(nullable: false),
+                        AdvertType = c.Int(nullable: false),
+                        CreatedTime = c.DateTime(nullable: false),
+                        Cost = c.Single(nullable: false),
+                        Square = c.Single(nullable: false),
+                        Latitude = c.Double(nullable: false),
+                        Longitude = c.Double(nullable: false),
+                        IsActive = c.Boolean(nullable: false),
+                        ObjectType = c.Int(),
                         HasSecurity = c.Boolean(),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Adverts", t => t.Id)
-                .Index(t => t.Id);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Houses",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Guid(nullable: false),
+                        RealtyType = c.Int(nullable: false),
+                        AdvertType = c.Int(nullable: false),
+                        CreatedTime = c.DateTime(nullable: false),
+                        Cost = c.Single(nullable: false),
+                        Square = c.Single(nullable: false),
+                        Latitude = c.Double(nullable: false),
+                        Longitude = c.Double(nullable: false),
+                        IsActive = c.Boolean(nullable: false),
+                        ObjectType = c.Int(),
                         HouseSquare = c.Single(),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Adverts", t => t.Id)
-                .Index(t => t.Id);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Lands",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Guid(nullable: false),
+                        RealtyType = c.Int(nullable: false),
+                        AdvertType = c.Int(nullable: false),
+                        CreatedTime = c.DateTime(nullable: false),
+                        Cost = c.Single(nullable: false),
+                        Square = c.Single(nullable: false),
+                        Latitude = c.Double(nullable: false),
+                        Longitude = c.Double(nullable: false),
+                        IsActive = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Adverts", t => t.Id)
-                .Index(t => t.Id);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Rooms",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Guid(nullable: false),
+                        RealtyType = c.Int(nullable: false),
+                        AdvertType = c.Int(nullable: false),
+                        CreatedTime = c.DateTime(nullable: false),
+                        Cost = c.Single(nullable: false),
+                        Square = c.Single(nullable: false),
+                        Latitude = c.Double(nullable: false),
+                        Longitude = c.Double(nullable: false),
+                        IsActive = c.Boolean(nullable: false),
+                        ObjectType = c.Int(),
+                        Rooms = c.Int(),
+                        Floor = c.Int(),
+                        FloorCount = c.Int(),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Apartments", t => t.Id)
-                .Index(t => t.Id);
+                .PrimaryKey(t => t.Id);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Rooms", "Id", "dbo.Apartments");
-            DropForeignKey("dbo.Lands", "Id", "dbo.Adverts");
-            DropForeignKey("dbo.Houses", "Id", "dbo.Adverts");
-            DropForeignKey("dbo.Garages", "Id", "dbo.Adverts");
-            DropForeignKey("dbo.Commercials", "Id", "dbo.Adverts");
-            DropForeignKey("dbo.Apartments", "Id", "dbo.Adverts");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.FileMetaDatas", "Advert_Id", "dbo.Adverts");
             DropForeignKey("dbo.FileMetaDatas", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropIndex("dbo.Rooms", new[] { "Id" });
-            DropIndex("dbo.Lands", new[] { "Id" });
-            DropIndex("dbo.Houses", new[] { "Id" });
-            DropIndex("dbo.Garages", new[] { "Id" });
-            DropIndex("dbo.Commercials", new[] { "Id" });
-            DropIndex("dbo.Apartments", new[] { "Id" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.FileMetaDatas", new[] { "Advert_Id" });
             DropIndex("dbo.FileMetaDatas", new[] { "UserId" });
             DropTable("dbo.Rooms");
             DropTable("dbo.Lands");
@@ -221,7 +231,6 @@ namespace RealtyStore.Migrations
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.FileMetaDatas");
-            DropTable("dbo.Adverts");
         }
     }
 }

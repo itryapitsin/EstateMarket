@@ -4,16 +4,17 @@ using RealtyStore.Models.Business;
 
 namespace RealtyStore.Infrastructure.Specifications
 {
-    public class RoomFloorCountSpecification: Specification<Room>
+    public class FloorCountSpecification : Specification<Apartment>
     {
         private FloorCountFilter? _floorCountFilter;
-        public RoomFloorCountSpecification(FloorCountFilter? floorCountFilter)
+        public FloorCountSpecification(FloorCountFilter? floorCountFilter)
         {
             _floorCountFilter = floorCountFilter;
         }
-        public override Expression<Func<Room, bool>> IsSatisfied()
+        public override Expression<Func<Apartment, bool>> IsSatisfied()
         {
             return room => !_floorCountFilter.HasValue ||
+                           !room.FloorCount.HasValue || 
                            (_floorCountFilter.Value == FloorCountFilter.LessThat5
                                ? room.FloorCount < 5
                                : _floorCountFilter.Value == FloorCountFilter.From5To8

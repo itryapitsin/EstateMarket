@@ -7,11 +7,11 @@ namespace RealtyStore.Models.Business
 {
     public enum RealtyType
     {
-        Rooms, 
-        Apartments,
-        Houses,
-        Lands,
-        Garages,
-        Commercials
+        Room = 1, 
+        Apartment = 2,
+        House = 3,
+        Land = 4,
+        Garage = 5,
+        Commercial = 6
     }
 }

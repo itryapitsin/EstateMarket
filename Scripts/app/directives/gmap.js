@@ -149,8 +149,7 @@
                         shadow: scope.gmap.config.markerShadowIcon,
                         zIndex: 5,
                         animation: google.maps.Animation.DROP
-                    })
-                    ;
+                    });
                     marker.addListener('mouseover', function (e) {
                         this.setOptions({
                             icon: scope.gmap.config.markerDeleteIcon,
@@ -180,14 +179,14 @@
                         config.initMarkers(url, map, callback);
                 },
 
-                placeStaticMarker: function (map, latitude, longitude, location, extData) {
-                    var staticMarker = this.createStaticMarker(map, latitude, longitude, location, extData);
+                placeStaticMarker: function (latitude, longitude, location, extData) {
+                    var staticMarker = this.createStaticMarker(latitude, longitude, location, extData);
 
                     scope.gmap.staticMarkers.push(staticMarker);
                     return staticMarker;
                 },
 
-                createStaticMarker: function (map, latitude, longitude, location, extData) {
+                createStaticMarker: function (latitude, longitude, location, extData) {
                     var staticMarker = new google.maps.Marker({
                         position: new google.maps.LatLng(latitude, longitude),
                         //icon: scope.gmap.config.markerIconPreset.noVotes,
@@ -196,8 +195,10 @@
                         flat: true,
                         title: location,
                         zIndex: 60,
+                        //map: map,
                         extData: extData
                     });
+
                     var rating = extData.rating;
                     var ratingPreset = scope.gmap.config.ratingPreset;
 
@@ -267,7 +268,7 @@
             scope.gmap.removeMarkers = function () {
                 //markerCluster.clearMarkers();
                 angular.forEach(scope.gmap.staticMarkers, function(marker) {
-                    config.removeMarker(marker);
+                    scope.gmap.removeMarker(marker);
                 });
 
                 scope.gmap.staticMarkers = [];

@@ -29,9 +29,9 @@
                         Далее
                     </button>
 
-                    <button type="submit" class="btn btn-success" ng-show="isLastStep()">
+                    <button type="submit" class="btn btn-success" ng-show="isLastStep()" ng-disable="loading">
                         <span class="glyphicon glyphicon-ok-circle"></span>
-                        OK
+                        {{publishButtonLabel}}
                     </button>
                 </div>
             </form>

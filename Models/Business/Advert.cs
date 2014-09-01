@@ -5,7 +5,7 @@ namespace RealtyStore.Models.Business
 {
     public abstract class Advert
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public RealtyType RealtyType { get; set; }
 

@@ -11,7 +11,7 @@ namespace RealtyStore.Models.Business
 
         public Garage()
         {
-            RealtyType = RealtyType.Garages;
+            RealtyType = RealtyType.Garage;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace RealtyStore.Models.Business
     {
         public Commercial()
         {
-            RealtyType = RealtyType.Commercials;
+            RealtyType = RealtyType.Commercial;
         }
     }
 }

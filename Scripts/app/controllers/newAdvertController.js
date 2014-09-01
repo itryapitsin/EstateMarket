@@ -5,6 +5,7 @@
         $scope.stepCount = 2;
         $scope.errors = {};
         $scope.warnings = {};
+        $scope.publishButtonLabel = "Добавить";
 
         $scope.closeDialog = function() {
             delete $scope.realtyType;

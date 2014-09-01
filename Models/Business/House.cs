@@ -11,7 +11,7 @@ namespace RealtyStore.Models.Business
 
         public House()
         {
-            RealtyType = RealtyType.Houses;
+            RealtyType = RealtyType.House;
         }
     }
 }

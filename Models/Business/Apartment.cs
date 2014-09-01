@@ -15,7 +15,7 @@ namespace RealtyStore.Models.Business
 
         public Apartment()
         {
-            RealtyType = RealtyType.Apartments;
+            RealtyType = RealtyType.Apartment;
         }
     }
 }

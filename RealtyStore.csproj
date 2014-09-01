@@ -171,10 +171,11 @@
     <Compile Include="Infrastructure\Specifications\AdvertTypeSpecification.cs" />
     <Compile Include="Infrastructure\Specifications\AdvertWithPhotoSpecification.cs" />
     <Compile Include="Infrastructure\Specifications\GeoSpecification.cs" />
+    <Compile Include="Infrastructure\Specifications\ObjectTypeSpecification.cs" />
     <Compile Include="Infrastructure\Specifications\RealtyTypeSpecification.cs" />
     <Compile Include="Infrastructure\Specifications\RoomCountSpecification.cs" />
-    <Compile Include="Infrastructure\Specifications\RoomFloorCountSpecification.cs" />
-    <Compile Include="Infrastructure\Specifications\RoomFloorSpecification.cs" />
+    <Compile Include="Infrastructure\Specifications\FloorCountSpecification.cs" />
+    <Compile Include="Infrastructure\Specifications\FloorSpecification.cs" />
     <Compile Include="Infrastructure\DbContextExtensions.cs" />
     <Compile Include="Infrastructure\Specifications\Specification.cs" />
     <Compile Include="Infrastructure\Robokassa\Robokassa.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Infrastructure\Robokassa\RobokassaConfirmationRequest.cs" />
     <Compile Include="Infrastructure\Robokassa\RobokassaMode.cs" />
     <Compile Include="Infrastructure\Robokassa\RobokassaQueryType.cs" />
+    <Compile Include="Infrastructure\Specifications\SquareSpecification.cs" />
     <Compile Include="Infrastructure\StringExtensions.cs" />
     <Compile Include="Infrastructure\VkAuth\Constants.cs" />
     <Compile Include="Infrastructure\VkAuth\Provider\IVkAuthenticationProvider.cs" />
@@ -193,9 +195,9 @@
     <Compile Include="Infrastructure\VkAuth\VkAuthenticationMiddleware.cs" />
     <Compile Include="Infrastructure\VkAuth\VkAuthenticationOptions.cs" />
     <Compile Include="JsonNetResult.cs" />
-    <Compile Include="Migrations\201408291144274_InitialCreate.cs" />
-    <Compile Include="Migrations\201408291144274_InitialCreate.Designer.cs">
-      <DependentUpon>201408291144274_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201409010838460_InitialCreate.cs" />
+    <Compile Include="Migrations\201409010838460_InitialCreate.Designer.cs">
+      <DependentUpon>201409010838460_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -209,7 +211,7 @@
     <Compile Include="Models\Business\Apartment.cs" />
     <Compile Include="Models\Business\Commercial.cs" />
     <Compile Include="Models\Business\FloorCountFilter.cs" />
-    <Compile Include="Models\Business\FloorFilterType.cs" />
+    <Compile Include="Models\Business\FloorFilter.cs" />
     <Compile Include="Models\Business\Garage.cs" />
     <Compile Include="Models\Business\House.cs" />
     <Compile Include="Models\Business\Land.cs" />
@@ -329,8 +331,8 @@
     <Content Include="Views\Shared\_Warning.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201408291144274_InitialCreate.resx">
-      <DependentUpon>201408291144274_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201409010838460_InitialCreate.resx">
+      <DependentUpon>201409010838460_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

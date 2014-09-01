@@ -7,7 +7,7 @@ using RealtyStore.Models.Business;
 
 namespace RealtyStore.Infrastructure.Specifications
 {
-    public class RoomCountSpecification: Specification<Room>
+    public class RoomCountSpecification : Specification<Apartment>
     {
         private RoomsCountType? _roomCountFilter;
 
@@ -16,9 +16,10 @@ namespace RealtyStore.Infrastructure.Specifications
             _roomCountFilter = roomCount;
         }
 
-        public override Expression<Func<Room, bool>> IsSatisfied()
+        public override Expression<Func<Apartment, bool>> IsSatisfied()
         {
             return room => !_roomCountFilter.HasValue ||
+                !room.Rooms.HasValue ||
                 (_roomCountFilter == RoomsCountType.MoreThatNine 
                     ? room.Rooms >= _roomCountFilter
                     : room.Rooms == _roomCountFilter);

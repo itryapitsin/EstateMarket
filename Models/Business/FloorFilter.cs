@@ -5,7 +5,7 @@ using System.Web;
 
 namespace RealtyStore.Models.Business
 {
-    public enum FloorFilterType
+    public enum FloorFilter
     {
         NotFirst,
         NotLast,

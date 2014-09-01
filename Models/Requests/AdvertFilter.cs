@@ -10,9 +10,16 @@ namespace RealtyStore.Models.Requests
     {
         public RealtyType? RealtyType { get; set; }
         public AdvertType? AdvertType { get; set; }
-        public FloorFilterType? FloorFilter { get; set; }
+        public FloorFilter? FloorFilter { get; set; }
         public FloorCountFilter? FloorCountFilter { get; set; }
         public RoomsCountType? RoomCountFilter { get; set; }
+
+        public ObjectType? ObjectType { get; set; }
+
+        public int? SquareMin { get; set; }
+
+        public int? SquareMax { get; set; }
+
         public bool OnlyWithPhoto { get; set; }
         public double? MinCost { get; set; }
         public double? MaxCost { get; set; }

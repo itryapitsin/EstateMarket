@@ -18,8 +18,28 @@ namespace RealtyStore.Infrastructure.Services
 
             switch (model.RealtyType)
             {
-                case RealtyType.Rooms: 
+                case RealtyType.Room: 
                     result = GetRooms(model);
+                    break;
+
+                case RealtyType.Apartment:
+                    result = GetApartments(model);
+                    break;
+
+                case RealtyType.Commercial:
+                    result = GetCommerials(model);
+                    break;
+
+                case RealtyType.Garage:
+                    result = GetGarages(model);
+                    break;
+
+                case RealtyType.House:
+                    result = GetHouses(model);
+                    break;
+
+                case RealtyType.Land:
+                    result = GetLands(model);
                     break;
 
                 default: 
@@ -28,6 +48,9 @@ namespace RealtyStore.Infrastructure.Services
             }
 
             return result
+                .SelectSatisfying(new SquareSpecification(
+                    model.SquareMin, 
+                    model.SquareMax))
                 .SelectSatisfying(new GeoSpecification(
                     model.FromLatitude,
                     model.FromLongitude,
@@ -48,9 +71,48 @@ namespace RealtyStore.Infrastructure.Services
         {
             return GetAllAdverts(model)
                 .OfType<Room>()
-                .SelectSatisfying(new RoomFloorSpecification(model.FloorFilter))
+                .SelectSatisfying(new FloorSpecification(model.FloorFilter))
                 .SelectSatisfying(new RoomCountSpecification(model.RoomCountFilter))
-                .SelectSatisfying(new RoomFloorCountSpecification(model.FloorCountFilter));
+                .SelectSatisfying(new FloorCountSpecification(model.FloorCountFilter))
+                .SelectSatisfying(new ObjectTypeSpecification(model.ObjectType));
+        }
+
+        private IQueryable<Advert> GetCommerials(AdvertFilter model)
+        {
+            return GetAllAdverts(model)
+                .OfType<Commercial>()
+                .SelectSatisfying(new ObjectTypeSpecification(model.ObjectType));
+        }
+
+        private IQueryable<Advert> GetGarages(AdvertFilter model)
+        {
+            return GetAllAdverts(model)
+                .OfType<Garage>()
+                .SelectSatisfying(new ObjectTypeSpecification(model.ObjectType));
+        }
+
+        private IQueryable<Advert> GetHouses(AdvertFilter model)
+        {
+            return GetAllAdverts(model)
+                .OfType<House>()
+                .SelectSatisfying(new ObjectTypeSpecification(model.ObjectType));
+        }
+
+        private IQueryable<Advert> GetLands(AdvertFilter model)
+        {
+            return GetAllAdverts(model)
+                .OfType<Land>();
+        }
+
+        private IQueryable<Advert> GetApartments(AdvertFilter model)
+        {
+            return GetAllAdverts(model)
+                .Where(x => x.RealtyType == RealtyType.Apartment)
+                .OfType<Apartment>()
+                .SelectSatisfying(new FloorSpecification(model.FloorFilter))
+                .SelectSatisfying(new RoomCountSpecification(model.RoomCountFilter))
+                .SelectSatisfying(new FloorCountSpecification(model.FloorCountFilter))
+                .SelectSatisfying(new ObjectTypeSpecification(model.ObjectType));
         }
     }
 }

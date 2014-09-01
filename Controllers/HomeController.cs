@@ -34,6 +34,7 @@ namespace RealtyStore.Controllers
         public ActionResult PublishNewAdvert([AbstractBind(ConcreteTypeParameter = "realtyType", Path = "RealtyStore.Models.Business")]Advert model)
         {
             model.CreatedTime = DateTime.UtcNow;
+            model.Id = Guid.NewGuid();
 
             AdvertService.Context.Adverts.Add(model);
             AdvertService.Context.SaveChanges();

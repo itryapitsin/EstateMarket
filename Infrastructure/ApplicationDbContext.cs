@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using Microsoft.AspNet.Identity.EntityFramework;
 using RealtyStore.Infrastructure.Specifications;
@@ -64,33 +65,70 @@ namespace RealtyStore.Infrastructure
                 .Property(x => x.RealtyType)
                 .IsRequired();
 
+            //modelBuilder
+            //    .Entity<Advert>()
+            //    .Map<Apartment>(x => x.Requires("RealtyType").HasValue(2))
+            //    .Map<Commercial>(x => x.Requires("RealtyType").HasValue(6))
+            //    .Map<Garage>(x => x.Requires("RealtyType").HasValue(5))
+            //    .Map<House>(x => x.Requires("RealtyType").HasValue(3))
+            //    .Map<Land>(x => x.Requires("RealtyType").HasValue(4))
+            //    .Map<Room>(x => x.Requires("RealtyType").HasValue(1));
+
             modelBuilder
                 .Entity<Apartment>()
-                .ToTable("Apartments");
+                .Map(x =>
+                {
+                    x.ToTable("Apartments");
+                    x.MapInheritedProperties();
+                });
 
             modelBuilder
                 .Entity<Commercial>()
-                .ToTable("Commercials");
+                .Map(x =>
+                {
+                    x.MapInheritedProperties();
+                    x.ToTable("Commercials");
+                });
 
             modelBuilder
                 .Entity<Garage>()
-                .ToTable("Garages");
+                .Map(x =>
+                {
+                    x.MapInheritedProperties();
+                    x.ToTable("Garages");
+                });
 
             modelBuilder
                 .Entity<House>()
-                .ToTable("Houses");
+                .Map(x =>
+                {
+                    x.MapInheritedProperties();
+                    x.ToTable("Houses");
+                });
 
             modelBuilder
                 .Entity<Land>()
-                .ToTable("Lands");
+                .Map(x =>
+                {
+                    x.MapInheritedProperties();
+                    x.ToTable("Lands");
+                });
 
             modelBuilder
                 .Entity<Room>()
                 .Map(x =>
                 {
-                    x.MapInheritedProperties();
                     x.ToTable("Rooms");
+                    x.MapInheritedProperties();
                 });
+
+            //modelBuilder.Entity<Advert>().ToTable("Adverts");
+            //modelBuilder.Entity<Apartment>().ToTable("Apartments");
+            //modelBuilder.Entity<Commercial>().ToTable("Commercials");
+            //modelBuilder.Entity<Garage>().ToTable("Garages");
+            //modelBuilder.Entity<House>().ToTable("Houses");
+            //modelBuilder.Entity<Land>().ToTable("Lands");
+            //modelBuilder.Entity<Room>().ToTable("Rooms");
                 
 
             base.OnModelCreating(modelBuilder);
