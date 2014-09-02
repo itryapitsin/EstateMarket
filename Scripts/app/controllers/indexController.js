@@ -1,5 +1,5 @@
-﻿app.controller("IndexController", ['$scope', '$q', '$window', '$http', '$controller',
-    function ($scope, $q, $window, $http, $controller) {
+﻿app.controller("IndexController", ['$scope', '$q', '$window', '$http', '$controller', '$timeout', '$aside',
+    function ($scope, $q, $window, $http, $controller, $timeout, $aside) {
 
         $controller("BaseController", { $scope: $scope });
         
@@ -11,6 +11,11 @@
         }
 
         var markerCluster;
+
+        $scope.aside = {
+            "title": "Title",
+            "content": "Hello Aside<br />This is a multiline message!"
+        };
 
         $scope.emptyAdvertType = "Все";
         $scope.emptyRealtyType = "Неважно";
@@ -116,6 +121,13 @@
 
         $scope.showFilter = function() {
             $scope.isShowFilter = true;
+
+            $scope.filter = $aside({
+                scope: $scope,
+                template: 'filter.html',
+                placement: 'left',
+                backdrop: false
+            });
         };
 
         $scope.hideFilter = function () {
@@ -147,7 +159,7 @@
                 $scope.gmap.placeMarker(location.latLng);
                 $scope.isSelectedLocation = true;
             });
-            $scope.gmap.removeMarkers();
+            markerCluster.clearMarkers();
             $scope.isAddingAdvert = true;
             //$scope.gmap.map.setOptions({
             //     draggableCursor: 'url(maps.gstatic.com/mapfiles/pointer_8_8.cur),default'
@@ -215,14 +227,14 @@
                 $scope.cancelAddingAdvert);
         };
 
-        $scope.search = function (event) {
+        $scope.search = function (event, s) {
             if (event)
                 $(event.toElement).button('loading');
 
-            loadMarkers()
+            loadMarkers(s)
                 .then(function () {
                     if (event)
-                        $(event.toElement).button('reset');
+                        $(event.toElement).button('reset');;
             });
         };
 
@@ -230,8 +242,19 @@
             delete $scope.objectType;
         });
 
-        function loadMarkers() {
+        function loadMarkers(scope) {
             var bounds = $scope.gmap.map.getBounds();
+            $scope.loading = true;
+
+            if (scope) {
+                $scope.realtyType = scope.realtyType;
+                $scope.advertType = scope.advertType;
+                $scope.objectType = scope.objectType;
+                $scope.roomCountFilter = scope.roomsCount;
+                $scope.floorFilter = scope.stage;
+                $scope.floorCountFilter = scope.stageCount;
+            }
+
             return $http
                 .get("/home/markers", {
                     params: {
@@ -241,6 +264,7 @@
                         toLongitude: bounds.va.j,
 
                         realtyType: $scope.realtyType,
+                        advertType: $scope.advertType,
                         objectType: $scope.objectType,
                         roomCountFilter: $scope.roomsCount,
                         floorFilter: $scope.stage,
@@ -251,10 +275,12 @@
                     }
                 })
                 .success(function (data) {
-                    
-                    markerCluster.clearMarkers();
+                    $timeout(function () {
+                        $scope.loading = false;
+                    }, 750);
+
                     try {
-                        
+                        markerCluster.clearMarkers();
                         for (var i in data) {
                             var marker = $scope.gmap.createStaticMarker(
                                 data[i]['longitude'],
@@ -264,13 +290,13 @@
                             $scope.gmap.staticMarkers.push(marker);
                             markerCluster.addMarker(marker);
                         }
-
-                       
-                    
                     } catch (e) {
                         console.log(e);
                     }
-            });
+                })
+                .error(function() {
+                    $scope.loading = false;
+                });
 
         }
     }]);

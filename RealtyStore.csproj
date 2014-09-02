@@ -329,6 +329,8 @@
     <Content Include="Views\Home\AddAdvert\_Step2.cshtml" />
     <Content Include="Views\Home\AddAdvert\_Step3.cshtml" />
     <Content Include="Views\Shared\_Warning.cshtml" />
+    <Content Include="Views\Shared\Links\_AngularAnimate.cshtml" />
+    <Content Include="Views\Home\_Filter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201409010838460_InitialCreate.resx">

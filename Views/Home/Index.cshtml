@@ -4,6 +4,7 @@
     @Html.Partial("Links\\_Angular")
     @Html.Partial("Links\\_AngularRoute")
     @Html.Partial("Links\\_AngularStrap")
+    @Html.Partial("Links\\_AngularAnimate")
     @Html.Partial("Links\\_Bootstrap")
     @Html.Partial("Links\\_Select2")
     @Html.Partial("Links\\_Moment")
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="/content/common.css" />
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/src/markerclusterer.js"></script>
+    
 
     <script src="/scripts/jquery.inputmask.js"></script>
     <script src="/scripts/jquery.inputmask-multi.js"></script>
@@ -35,75 +37,30 @@
 <div ng-controller="IndexController">
     <div id="mapSidebar" class="nav"></div>
     <div id="mapContainer" ng-gmap="mycity"></div>
-
-    <div class="hidden-print hidden-xs hidden-sm affix well well-sm sidebar col-lg-2 dark-white" role="complementary" ng-show="isShowFilter && !isAddingAdvert" ng-animate="{show:'animate-show', hide:'animate-hide'}">
-        <div class="row space1">
-            <div class="col-lg-12 text-right">
-                <i class="glyphicon glyphicon-eye-close" ng-click="hideFilter()" style="cursor: pointer;"></i>
+    
+    <script type="text/ng-template" id="filter.html">
+        @Html.Partial("_Filter")
+    </script>
+    
+    <div ng-show="loading" id="loader" class="affix well text-center animate-show-hide" style="left: 45%; right: 45%; top: -5px; box-shadow: 0 0 0 4px rgba(0,0,0, .05);">
+        <div class="row">
+            <div class="col-lg-5" style="padding-right:0">
+                <img src="https://abs.twimg.com/a/1409252720/img/t1/spinner-rosetta-gray-32x32.gif" />
             </div>
-        </div>
-        @Html.Partial("_RealtyType")
-        @Html.Partial("_AdvertType")
-        @Html.Partial("_RoomFilter")
-        @Html.Partial("_ApartmentFilter")
-        @Html.Partial("_HouseFilter")
-        @Html.Partial("_HouseSquareFilter")
-        @Html.Partial("_LandFilter")
-
-        @*@Html.Partial("_LocationFilter")*@
-
-        @Html.Partial("_GarageFilter")
-        @Html.Partial("_CommercialFilter")
-
-        <div class="row space1" ng-show="isRoomOrApartments()">
-            <div class="col-lg-12">
-                <label>Этаж</label>
-                <select style="width: 100%; height: 30px;" ng-model="stage">
-                    <option value="">Неважно</option>
-                    <option value="notFirst">Не первый</option>
-                    <option value="notLast">Не последний</option>
-                    <option value="notFirstAndNotLast">Не первый и не последний</option>
-                </select>
-            </div>
-        </div>
-        <div class="row space1" ng-show="isRoomOrApartments()">
-            <div class="col-lg-12">
-                <label>Этажей в доме</label>
-                <select style="width: 100%; height: 30px;" ng-model="stageCount">
-                    <option value="">Неважно</option>
-                    <option value="lessThat5">меньше 5</option>
-                    <option value="from5to8">от 5 до 8</option>
-                    <option value="from9to12">от 9 до 12</option>
-                    <option value="from13to16">от 13 до 16</option>
-                    <option value="from17to25">от 17 до 25</option>
-                    <option value="moreThat25">более 25</option>
-                </select>
+            <div class="col-lg-6" style="padding-left:0; margin-top: 7px;">
+                Загрузка...
             </div>
         </div>
 
-        @Html.Partial("_CostFilter")
-
-        <div class="row space1">
-            <div class="col-lg-12">
-                <label>
-                    <input type="checkbox" ng-model="onlyWithPhoto" /> Только с фото
-                </label>
-            </div>
-        </div>
-        <div class="row space1">
-            <div class="col-lg-12">
-                <button class="btn btn-success" ng-click="search($event)" data-loading-text="Поиск..." style="width:100%;">Показать</button>
-            </div>
-        </div>
     </div>
 
-    <div class="sidebar-toggle" ng-click="showFilter()" ng-hide="isShowFilter || isAddingAdvert" ng-animate="{show:'animate-show', hide:'animate-hide'}">
+    <div class="sidebar-toggle animate-show-hide" ng-click="showFilter()" ng-hide="isAddingAdvert">
         <a href="#" class="sidebar-toggle"></a>
     </div>
 
-    <div class="affix" style="right: 0; bottom: 7px; left: 0">
+    <div class="affix animate-show-hide" style="right: 0; bottom: 7px; left: 0" ng-show="isAddingAdvert">
         <div class="row">
-            <div class="col-lg-6 col-lg-offset-3 alert alert-info" ng-show="isAddingAdvert && !emptyLocation">
+            <div class="col-lg-6 col-lg-offset-3 alert alert-info" ng-show="!emptyLocation">
                 <div class="row">
                     <div class="col-lg-8" style="margin-top: 10px;">
                         <i class="glyphicon glyphicon-info-sign"></i>
@@ -119,8 +76,8 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="col-lg-6 col-lg-offset-3 alert alert-danger" ng-show="isAddingAdvert && emptyLocation">
+
+            <div class="col-lg-6 col-lg-offset-3 alert alert-danger" ng-show="emptyLocation">
                 <div class="row">
                     <div class="col-lg-8" style="margin-top: 10px;">
                         <i class="glyphicon glyphicon-exclamation-sign"></i>
@@ -139,7 +96,7 @@
         </div>
     </div>
 
-    <button class="btn btn-warning affix" style="right: 33px; top: 7px;" ng-click="addAdvert()" ng-hide="isAddingAdvert">
+    <button class="btn btn-warning affix animate-show-hide" style="right: 33px; top: 7px;" ng-click="addAdvert()" ng-hide="isAddingAdvert">
         Подать объявление
     </button>
     <script type="text/ng-template" id="add-advert-dialog.html">

@@ -1,4 +1,4 @@
-﻿<div class="modal" id="NewAdvertModal" ng-controller="NewAdvertController">
+﻿<div class="modal" ng-controller="NewAdvertController">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form ng-submit="onSuccess(this)">
@@ -18,7 +18,7 @@
                         <span class="glyphicon glyphicon-ban-circle"></span>
                         Отмена
                     </button>
-                    
+
                     <button type="button" class="btn btn-default" ng-hide="isFirstStep()" ng-click="back()">
                         <span class="glyphicon glyphicon-arrow-left"></span>
                         Назад

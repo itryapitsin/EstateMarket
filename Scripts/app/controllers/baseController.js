@@ -19,6 +19,7 @@
                 template: templateUrl,
                 show: false,
                 backdrop: 'static',
+                animation: 'am-fade-and-scale',
                 scope: self
             });
 
@@ -29,7 +30,7 @@
                     beforeShow(self);
 
                 modalPromise.show();
-                $(".modal-backdrop").addClass("in");
+               // $(".modal-backdrop").addClass("in");
             });
         };
 
