@@ -1,37 +1,68 @@
-﻿<div class="aside am-slide-left" tabindex="-1" role="dialog" style=" box-shadow: 0 0 0 4px rgba(0,0,0, .05);">
+﻿<div class="aside am-slide-left" tabindex="-1" role="dialog" style=" box-shadow: 0 0 0 4px rgba(0,0,0, .05);" ng-hide="isAddingAdvert">
     <div class="aside-dialog">
         <div class="aside-content">
             <div class="aside-header">
                 <button type="button" class="close" ng-click="$hide()">×</button>
                 <h4 class="aside-title">Список недвижимости</h4>
             </div>
-            <div class="aside-body">
-                <div ng-repeat="advert in selectedAdverts" style="cursor: pointer">
-                    <div class="row space1">
-                        <div class="col-lg-3"><strong>Тип</strong></div>
-                        <div class="col-lg-9  text-right">
-                            <span ng-show="advert.realtyType == 'room'">Комнаты</span>
-                            <span ng-show="advert.realtyType == 'apartment'">Квартиры</span>
-                            <span ng-show="advert.realtyType == 'house'">Дома, дачи, коттеджи</span>
-                            <span ng-show="advert.realtyType == 'land'">Земельные участки</span>
-                            <span ng-show="advert.realtyType == 'garage'">Гаражи и машиноместа</span>
-                            <span ng-show="advert.realtyType == 'commercial'">Коммерческая недвижимость</span>
-                        </div>
+            <div class="aside-body" ng-repeat="advert in selectedAdverts" style="cursor: pointer; border-bottom: solid 1px #eee;">
+                <div class="row space1">
+                    <div class="col-lg-4">
+                        <span class="label label-warning" ng-show="advert.advertType == 'sell'">Продажа</span>
+                        <span class="label label-info" ng-show="advert.advertType == 'rent'">Аренда</span>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <strong>Стоимость</strong>
-                        </div>
-                        <div class="col-lg-6 text-right">
-                            {{advert.cost | currency}}
-                        </div>
-                        <hr />
+                    <div class="col-lg-8  text-right">
+                        <span ng-show="advert.realtyType == 'room'">Комната</span>
+                        <span ng-show="advert.realtyType == 'apartment'">Квартира</span>
+                        @*<span ng-show="advert.realtyType == 'house'">Дома, дачи, коттеджи</span>
+                        <span ng-show="advert.realtyType == 'land'">Земельные участки</span>
+                        <span ng-show="advert.realtyType == 'garage'">Гаражи и машиноместа</span>
+                        <span ng-show="advert.realtyType == 'commercial'">Коммерческая недвижимость</span>*@
+                        
+                        <span ng-show="advert.objectType == 'firstHand'">(новостройка)</span>
+                        <span ng-show="advert.objectType == 'secondHand'">(вторичка)</span>
+
+                        <span ng-show="advert.objectType == 'house'">Дом</span>
+                        <span ng-show="advert.objectType == 'countryHouse'">Дача</span>
+                        <span ng-show="advert.objectType == 'townhouse'">Таун-хаус</span>
+                        <span ng-show="advert.objectType == 'cottage'">Коттедж</span>
+                        <span ng-show="advert.objectType == 'garage'">Гараж</span>
+                        <span ng-show="advert.objectType == 'carplace'">Машиноместо</span>
+                        <span ng-show="advert.objectType == 'hotel'">Отель</span>
+                        <span ng-show="advert.objectType == 'office'">Коммерческая недв.</span>
+                        <span ng-show="advert.objectType == 'general'">Свободного назнач.</span>
+                        <span ng-show="advert.objectType == 'production'">Производственное пом.</span>
+                        <span ng-show="advert.objectType == 'trade'">Торговая недвиж.</span>
+                        <span ng-show="advert.objectType == 'warehouse'">Складское пом.</span>
+                    </div>
+                </div>
+                
+                <div class="row space1" ng-show="advert.square != 0">
+                    <div class="col-lg-6">Площадь</div>
+                    <div class="col-lg-6">{{square}}</div>
+                </div>
+                
+                
+                
+                <div class="row space1">
+                    <div class="col-lg-4">
+                        Цена
+                    </div>
+                    <div class="col-lg-8 text-right">
+                        {{advert.cost | currency}}
+                    </div>
+                </div>
+                
+                <div class="row" ng-show="photos && photos.length > 0">
+                    <div class="col-lg-6">
+                        <i class="glyphicon glyphicon-camera" title="Есть фото">
+                        </i>
                     </div>
                 </div>
             </div>
-            <div class="aside-footer">
+            @*<div class="aside-footer" style="border-top: 0">
                 <button class="btn btn-success" ng-click="$hide()" data-loading-text="Поиск..." style="width:100%;">Закрыть</button>
-            </div>
+            </div>*@
         </div>
     </div>
 </div>
