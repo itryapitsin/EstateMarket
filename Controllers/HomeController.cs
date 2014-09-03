@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -39,7 +41,41 @@ namespace RealtyStore.Controllers
             AdvertService.Context.Adverts.Add(model);
             AdvertService.Context.SaveChanges();
 
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
+            return new JsonNetResult(new {Id = model.Id});
+        }
+
+        [HttpPost]
+        public ActionResult UploadImage(Guid advertId)
+        {
+            try
+            {
+                var advert = AdvertService.GetAdvert(advertId);
+
+                var file = System.Web.HttpContext.Current.Request.Files[0];
+                var ext = Path.GetExtension(file.FileName).ToUpper();
+                var path = Server.MapPath("~/Content/images/adverts/" + advertId);
+
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+
+                var fileName = Guid.NewGuid().ToString().ToUpper();
+
+                file.SaveAs(path + "\\" + fileName + ext);
+
+                advert.FilesMetaData.Add(new FileMetaData
+                {
+                    Type = FileMetaDataType.Image,
+                    Filename = fileName + ext
+                });
+
+                AdvertService.Context.SaveChanges();
+
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
+            }
+            catch (ObjectNotFoundException e)
+            {
+                return new HttpNotFoundResult();
+            }
         }
     }
 }

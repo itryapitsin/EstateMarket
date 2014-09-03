@@ -1,21 +1,15 @@
-﻿app.controller("IndexController", ['$scope', '$q', '$window', '$http', '$controller', '$timeout', '$aside',
-    function ($scope, $q, $window, $http, $controller, $timeout, $aside) {
+﻿app.controller("IndexController", ['$scope', '$q', '$window', '$http', '$controller', '$timeout', '$aside', '$popover',
+    function ($scope, $q, $window, $http, $controller, $timeout, $aside, $popover) {
 
         $controller("BaseController", { $scope: $scope });
         
         var mapCenter = { k: 61.783333, A: 34.35 };
         var scope = $scope;
 
-        if (google.loader.ClientLocation) {
+        if (google.loader.ClientLocation) 
             mapCenter = new google.maps.LatLng(google.loader.ClientLocation.latitude, google.loader.ClientLocation.longitude);
-        }
 
         var markerCluster;
-
-        $scope.aside = {
-            "title": "Title",
-            "content": "Hello Aside<br />This is a multiline message!"
-        };
 
         $scope.emptyAdvertType = "Все";
         $scope.emptyRealtyType = "Неважно";
@@ -52,6 +46,7 @@
             afterInitMap: function (map) {
                 var mcOptions = {
                     gridSize: 40,
+                    zoomOnClick: false,
                     styles: [
                         {
                             height: 80,
@@ -69,7 +64,8 @@
             },
             clickStaticMarkerCallback: function(marker) {
                 //document.location.hash = 'markerID:' + marker.extData.id;
-                scope.gmap.dialogDisplayed = true;
+                $scope.showDialog('detailed-adverts-dialog.html');
+                //var myPopover = $popover({ title: 'My Title', content: 'My Content' });
             },
             initMarkers: function (url, map, callback) {
                 loadMarkers()
@@ -154,6 +150,10 @@
             $scope.search();
         };
 
+        $scope.onZoomChanged = function(e) {
+            $scope.search();
+        };
+
         $scope.addAdvert = function () {
             google.maps.event.addListener($scope.gmap.map, 'click', function (location) {
                 $scope.gmap.placeMarker(location.latLng);
@@ -213,7 +213,13 @@
 
                     $http
                         .post('/home/publishnewadvert', advert)
-                        .success(function(result) {
+                        .success(function (result) {
+                            $.map(s.uploader.queue, function (item) {
+                                item.url = "/home/uploadimage?advertId=" + result.id;
+                            });
+
+                            s.uploader.uploadAll();
+
                             $scope.cancelAddingAdvert();
                             s.loading = false;
                             s.publishButtonLabel = "Добавить";
@@ -255,6 +261,8 @@
                 $scope.floorCountFilter = scope.stageCount;
             }
 
+            google.maps.event.clearListeners(markerCluster, "click");
+
             return $http
                 .get("/home/markers", {
                     params: {
@@ -290,6 +298,25 @@
                             $scope.gmap.staticMarkers.push(marker);
                             markerCluster.addMarker(marker);
                         }
+
+                        google.maps.event.addListener(markerCluster, "click", function (cluster) {
+                            if ($scope.selectedAdvertsAside)
+                                $scope.selectedAdvertsAside.hide();
+
+                            if ($scope.filter)
+                                $scope.filter.hide();
+
+                            $timeout(function() {
+                                $scope.selectedAdverts = from(cluster.getMarkers()).select("$extData").toArray();
+                            }, 200);
+                            
+                            $scope.selectedAdvertsAside = $aside({
+                                scope: $scope,
+                                template: 'detailed-adverts.html',
+                                placement: 'left',
+                                backdrop: false
+                            });
+                        });
                     } catch (e) {
                         console.log(e);
                     }

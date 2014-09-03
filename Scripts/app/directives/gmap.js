@@ -107,6 +107,11 @@
                             scope.onDragEnd(event);
                     });
 
+                    google.maps.event.addListener(scope.gmap.map, 'zoom_changed', function () {
+                        if (scope.onZoomChanged)
+                            scope.onZoomChanged(event);
+                    });
+
                     if (config.afterInitMap)
                         config.afterInitMap(scope.gmap.map);
                     
@@ -203,7 +208,7 @@
                     var ratingPreset = scope.gmap.config.ratingPreset;
 
                     if (scope.gmap.config.clickStaticMarkerCallback) {
-                        staticMarker.addListener('mouseup', function () {
+                        staticMarker.addListener('mouseup', function (s,e,k) {
                             scope.gmap.config.clickStaticMarkerCallback(this);
                         });
                     }
@@ -230,7 +235,8 @@
 
                 saveMarker: function (marker, location, description, author, successCallback, errorCallback) {
                     if (config.saveMarker)
-                        config.saveMarker(marker, location, description, author, successCallback, errorCallback)
+                        config
+                            .saveMarker(marker, location, description, author, successCallback, errorCallback)
                             .success(function(data, status, r) {
                                 var newMarker = null;
                                 if (angular.isDefined(data[0])) {
@@ -246,7 +252,8 @@
                                 marker = null;
                                 if (successCallback)
                                     successCallback(newMarker);
-                            }).error(function(jq, status, error) {
+                            })
+                            .error(function (jq, status, error) {
                                 if (errorCallback)
                                     errorCallback(error);
                             });

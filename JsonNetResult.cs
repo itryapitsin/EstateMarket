@@ -12,7 +12,7 @@ namespace RealtyStore
         public static readonly JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings
         {
             NullValueHandling = NullValueHandling.Ignore,
-            Converters = new JsonConverter[] { new IsoDateTimeConverter() },
+            Converters = new JsonConverter[] { new IsoDateTimeConverter(), new StringEnumConverter { CamelCaseText = true }, },
             ContractResolver = new CamelCasePropertyNamesContractResolver(),
             TypeNameHandling = TypeNameHandling.None,
             Formatting = Formatting.None,

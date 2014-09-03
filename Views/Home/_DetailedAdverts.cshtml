@@ -1,0 +1,37 @@
+﻿<div class="aside am-slide-left" tabindex="-1" role="dialog" style=" box-shadow: 0 0 0 4px rgba(0,0,0, .05);">
+    <div class="aside-dialog">
+        <div class="aside-content">
+            <div class="aside-header">
+                <button type="button" class="close" ng-click="$hide()">×</button>
+                <h4 class="aside-title">Список недвижимости</h4>
+            </div>
+            <div class="aside-body">
+                <div ng-repeat="advert in selectedAdverts" style="cursor: pointer">
+                    <div class="row space1">
+                        <div class="col-lg-3"><strong>Тип</strong></div>
+                        <div class="col-lg-9  text-right">
+                            <span ng-show="advert.realtyType == 'room'">Комнаты</span>
+                            <span ng-show="advert.realtyType == 'apartment'">Квартиры</span>
+                            <span ng-show="advert.realtyType == 'house'">Дома, дачи, коттеджи</span>
+                            <span ng-show="advert.realtyType == 'land'">Земельные участки</span>
+                            <span ng-show="advert.realtyType == 'garage'">Гаражи и машиноместа</span>
+                            <span ng-show="advert.realtyType == 'commercial'">Коммерческая недвижимость</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <strong>Стоимость</strong>
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            {{advert.cost | currency}}
+                        </div>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+            <div class="aside-footer">
+                <button class="btn btn-success" ng-click="$hide()" data-loading-text="Поиск..." style="width:100%;">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>

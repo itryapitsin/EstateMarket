@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Web;
 using RealtyStore.Infrastructure.Specifications;
+using RealtyStore.Models;
 using RealtyStore.Models.Business;
 using RealtyStore.Models.Requests;
 
@@ -57,6 +60,21 @@ namespace RealtyStore.Infrastructure.Services
                     model.ToLatitude,
                     model.ToLongitude))
                 .AsEnumerable();
+        }
+
+        public Advert GetAdvert(Guid advertId)
+        {
+            var advert = Context.Adverts
+                .Include("FilesMetaData")
+                .FirstOrDefault(x => x.Id == advertId);
+
+            if(advert == null)
+                throw new ObjectNotFoundException();
+
+            if(advert.FilesMetaData == null)
+                advert.FilesMetaData = new Collection<FileMetaData>();
+
+            return advert;
         }
 
         private IQueryable<Advert> GetAllAdverts(AdvertFilter model)
