@@ -3,9 +3,11 @@
         <div class="aside-content">
             <div class="aside-header">
                 <button type="button" class="close" ng-click="$hide()">×</button>
-                <h4 class="aside-title">Список недвижимости</h4>
+                <h4 class="aside-title">
+                    Список недвижимости
+                </h4>
             </div>
-            <div class="aside-body" ng-repeat="advert in selectedAdverts" style="cursor: pointer; border-bottom: solid 1px #eee;">
+            <div class="aside-body" ng-repeat="advert in selectedAdverts" style="cursor: pointer; border-bottom: solid 1px #eee;" ng-click="showAdvertDetailed(advert)">
                 <div class="row space1">
                     <div class="col-lg-4">
                         <span class="label label-warning" ng-show="advert.advertType == 'sell'">Продажа</span>

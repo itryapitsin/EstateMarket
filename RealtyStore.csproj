@@ -315,24 +315,25 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Views\Home\AddAdvert\_Index.cshtml" />
+    <Content Include="Views\Home\Advert\_Add.cshtml" />
     <Content Include="Views\Home\_RealtyType.cshtml" />
     <Content Include="Views\Home\_AdvertType.cshtml" />
-    <Content Include="Views\Home\AddAdvert\_Cost.cshtml" />
-    <Content Include="Views\Home\AddAdvert\_Stage.cshtml" />
+    <Content Include="Views\Home\Advert\_Cost.cshtml" />
+    <Content Include="Views\Home\Advert\_Stage.cshtml" />
     <Content Include="Views\Home\_HouseSquareFilter.cshtml" />
-    <Content Include="Views\Home\AddAdvert\_HouseSquare.cshtml" />
+    <Content Include="Views\Home\Advert\_HouseSquare.cshtml" />
     <Content Include="Views\Home\_LocationFilter.cshtml" />
-    <Content Include="Views\Home\AddAdvert\_LandSquare.cshtml" />
-    <Content Include="Views\Home\AddAdvert\_Description.cshtml" />
-    <Content Include="Views\Home\AddAdvert\_Step1.cshtml" />
-    <Content Include="Views\Home\AddAdvert\_Step2.cshtml" />
-    <Content Include="Views\Home\AddAdvert\_Step3.cshtml" />
+    <Content Include="Views\Home\Advert\_LandSquare.cshtml" />
+    <Content Include="Views\Home\Advert\_Description.cshtml" />
+    <Content Include="Views\Home\Advert\_Step1.cshtml" />
+    <Content Include="Views\Home\Advert\_Step2.cshtml" />
+    <Content Include="Views\Home\Advert\_Step3.cshtml" />
     <Content Include="Views\Shared\_Warning.cshtml" />
     <Content Include="Views\Shared\Links\_AngularAnimate.cshtml" />
     <Content Include="Views\Home\_Filter.cshtml" />
-    <Content Include="Views\Home\_DetailedAdverts.cshtml" />
+    <Content Include="Views\Home\Advert\_AdvertList.cshtml" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
+    <Content Include="Views\Home\Advert\_AdvertDetailed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201409010838460_InitialCreate.resx">
