@@ -53,7 +53,7 @@ namespace RealtyStore.Controllers
 
                 var file = System.Web.HttpContext.Current.Request.Files[0];
                 var ext = Path.GetExtension(file.FileName).ToUpper();
-                var path = Server.MapPath("~/Content/images/adverts/" + advertId);
+                var path = Server.MapPath("~/images/adverts/" + advertId);
 
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);

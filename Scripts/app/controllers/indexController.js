@@ -36,11 +36,11 @@
             },
             mapURL: 'http://api.tiles.mapbox.com/v3/madeinmurmansk.map-d56tfjcd.jsonp',
             enableWAX: false,
-            markerIcon: '/images/marker.png',
-            markerShadowIcon: '/images/marker.shadow.png',
-            markerDeleteIcon: '/images/marker.delete.png',
-            markerDragIcon: '/images/marker.png',
-            markerStaticShadowIcon: '/images/marker.shadow.png',
+            markerIcon: '/content/images/marker.png',
+            markerShadowIcon: '/content/images/marker.shadow.png',
+            markerDeleteIcon: '/content/images/marker.delete.png',
+            markerDragIcon: '/content/images/marker.png',
+            markerStaticShadowIcon: '/content/images/marker.shadow.png',
             markersURL: '/markers',
 
             afterInitMap: function (map) {
@@ -50,7 +50,7 @@
                     styles: [
                         {
                             height: 80,
-                            url: "/images/marker.png",
+                            url: "/content/images/marker.png",
                             width: 48,
                             textColor: 'black',
                             anchorText: [-40, 0],

@@ -172,8 +172,6 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
-/Content/images/adverts
-/Content/images
 /Web.Release.config
 /Web.config
 /Web.Debug.config
