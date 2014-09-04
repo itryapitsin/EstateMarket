@@ -332,6 +332,7 @@
     <Content Include="Views\Shared\Links\_AngularAnimate.cshtml" />
     <Content Include="Views\Home\_Filter.cshtml" />
     <Content Include="Views\Home\_DetailedAdverts.cshtml" />
+    <None Include="Properties\PublishProfiles\Test.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201409010838460_InitialCreate.resx">
