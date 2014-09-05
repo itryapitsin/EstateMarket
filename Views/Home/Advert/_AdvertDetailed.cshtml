@@ -1,0 +1,72 @@
+﻿
+<div class="modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form ng-submit="onSuccess(this)">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" ng-click="onCancel()">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">
+                        <span ng-show="selectedAdvert.advertType == 'sell'">Продажа </span>
+                        <span ng-show="selectedAdvert.advertType == 'rent'">Аренда </span>
+                        недвижимости
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="row space1">
+                                <div class="col-lg-6">
+                                    <span class="label label-warning" ng-show="selectedAdvert.advertType == 'sell'">Продажа</span>
+                                    <span class="label label-info" ng-show="selectedAdvert.advertType == 'rent'">Аренда</span>
+                                </div>
+                                <div class="col-lg-6  text-right">
+                                    <span ng-show="selectedAdvert.realtyType == 'room'">Комната</span>
+                                    <span ng-show="selectedAdvert.realtyType == 'apartment'">Квартира</span>
+
+                                    <span ng-show="selectedAdvert.objectType == 'firstHand'">(новостройка)</span>
+                                    <span ng-show="selectedAdvert.objectType == 'secondHand'">(вторичка)</span>
+
+                                    <span ng-show="selectedAdvert.objectType == 'house'">Дом</span>
+                                    <span ng-show="selectedAdvert.objectType == 'countryHouse'">Дача</span>
+                                    <span ng-show="selectedAdvert.objectType == 'townhouse'">Таун-хаус</span>
+                                    <span ng-show="selectedAdvert.objectType == 'cottage'">Коттедж</span>
+                                    <span ng-show="selectedAdvert.objectType == 'garage'">Гараж</span>
+                                    <span ng-show="selectedAdvert.objectType == 'carplace'">Машиноместо</span>
+                                    <span ng-show="selectedAdvert.objectType == 'hotel'">Отель</span>
+                                    <span ng-show="selectedAdvert.objectType == 'office'">Коммерческая недв.</span>
+                                    <span ng-show="selectedAdvert.objectType == 'general'">Свободного назнач.</span>
+                                    <span ng-show="selectedAdvert.objectType == 'production'">Производственное пом.</span>
+                                    <span ng-show="selectedAdvert.objectType == 'trade'">Торговая недвиж.</span>
+                                    <span ng-show="selectedAdvert.objectType == 'warehouse'">Складское пом.</span>
+                                </div>
+                            </div>
+
+                            <div class="row space1" ng-show="selectedAdvert.square != 0">
+                                <div class="col-lg-4">Площадь</div>
+                                <div class="col-lg-8">{{square}}</div>
+                            </div>
+
+                            <div class="row space1">
+                                <div class="col-lg-4">
+                                    Цена
+                                </div>
+                                <div class="col-lg-8 text-right">
+                                    {{selectedAdvert.cost | currency}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="onCancel()">
+                        Закрыть
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -99,11 +99,16 @@
     <button class="btn btn-warning affix animate-show-hide" style="right: 33px; top: 7px;" ng-click="addAdvert()" ng-hide="isAddingAdvert">
         Подать объявление
     </button>
+
     <script type="text/ng-template" id="add-advert-dialog.html">
-        @Html.Partial("AddAdvert/_Index")
+        @Html.Partial("Advert/_Add")
     </script>
     
-    <script type="text/ng-template" id="detailed-adverts.html">
-        @Html.Partial("_DetailedAdverts")
+    <script type="text/ng-template" id="advert-list.html">
+        @Html.Partial("Advert/_AdvertList")
+    </script>
+    
+    <script type="text/ng-template" id="advert-detailed.html">
+        @Html.Partial("Advert/_AdvertDetailed")
     </script>
 </div>

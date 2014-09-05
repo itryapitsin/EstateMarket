@@ -63,9 +63,9 @@
                 
             },
             clickStaticMarkerCallback: function(marker) {
-                //document.location.hash = 'markerID:' + marker.extData.id;
-                $scope.showDialog('detailed-adverts-dialog.html');
-                //var myPopover = $popover({ title: 'My Title', content: 'My Content' });
+                $scope.selectedAdvert = marker.extData;
+
+                $scope.showDialogEx('advert-detailed.html');
             },
             initMarkers: function (url, map, callback) {
                 loadMarkers()
@@ -244,6 +244,19 @@
             });
         };
 
+        $scope.showAdvertDetailed = function (advert) {
+            $scope.selectedAdvert = advert;
+            $scope.selectedAdvert.isSelect = true;
+
+            $scope.showDialogEx('advert-detailed.html', {
+                onCancel: function () {
+                    $scope.selectedAdvert.isSelect = false;
+                    delete $scope.selectedAdvert;
+                    $scope.hideDialog();
+                }
+            });
+        };
+
         $scope.$watch('realtyType', function() {
             delete $scope.objectType;
         });
@@ -312,7 +325,7 @@
                             
                             $scope.selectedAdvertsAside = $aside({
                                 scope: $scope,
-                                template: 'detailed-adverts.html',
+                                template: 'advert-list.html',
                                 placement: 'left',
                                 backdrop: false
                             });

@@ -34,6 +34,44 @@
             });
         };
 
+        $scope.showDialogEx = function (templateUrl, obj) {
+            if (obj)
+                return $scope.showDialog(
+                    templateUrl,
+                    obj.onSuccess,
+                    obj.onCancel,
+                    obj.beforeShow);
+
+            return $scope.showDialog(templateUrl);
+
+            //var self = this;
+
+            //if (!obj && !obj.onSuccess)
+            //    obj.onSuccess = $scope.hideDialog;
+            //if (!obj && !obj.onCancel)
+            //    obj.onCancel = $scope.hideDialog;
+
+            //self.onSuccess = obj.onSuccess;
+            //self.onCancel = obj.onCancel;
+
+            //var modalPromise = $modal({
+            //    template: templateUrl,
+            //    show: false,
+            //    backdrop: 'static',
+            //    animation: 'am-fade-and-scale',
+            //    scope: self
+            //});
+
+            //$window.modalPromise = modalPromise;
+
+            //return modalPromise.$promise.then(function () {
+            //    if (!obj && !obj.beforeShow)
+            //        obj.beforeShow(self);
+
+            //    modalPromise.show();
+            //});
+        };
+
         $scope.showLoadingAnimation = function () {
             $scope.loading = true;
         };
