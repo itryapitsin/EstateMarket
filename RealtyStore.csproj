@@ -230,6 +230,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\common.css" />
+    <Content Include="Content\images\marker-pink.png" />
+    <Content Include="Content\images\marker.delete.png" />
+    <Content Include="Content\images\marker.png" />
+    <Content Include="Content\images\marker.shadow.png" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
