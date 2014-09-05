@@ -80,6 +80,7 @@ namespace RealtyStore.Infrastructure.Services
         private IQueryable<Advert> GetAllAdverts(AdvertFilter model)
         {
             return Context.Adverts
+                .Include("FilesMetaData")
                 .SelectSatisfying(new AdvertTypeSpecification(model.AdvertType))
                 .SelectSatisfying(new AdvertWithPhotoSpecification(model.OnlyWithPhoto))
                 .SelectSatisfying(new AdvertCostSpecification(model.MinCost, model.MaxCost));

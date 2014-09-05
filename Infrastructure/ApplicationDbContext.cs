@@ -30,7 +30,9 @@ namespace RealtyStore.Infrastructure
         {
             modelBuilder
                 .Entity<FileMetaData>()
-                .HasKey(x => x.Id);
+                .HasKey(x => x.Id)
+                .Property(x => x.AdvertId)
+                .HasColumnName("AdvertId");
 
             modelBuilder
                 .Entity<ApplicationUser>()
@@ -38,7 +40,13 @@ namespace RealtyStore.Infrastructure
 
             modelBuilder
                 .Entity<Advert>()
-                .HasKey(x => x.Id);
+                .HasKey(x => x.Id)
+                .Ignore(x => x.Photos);
+
+            modelBuilder
+                .Entity<Advert>()
+                .HasMany(x => x.FilesMetaData)
+                .WithRequired(x => x.Advert);
 
             modelBuilder
                 .Entity<Advert>()

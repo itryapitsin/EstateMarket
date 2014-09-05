@@ -43,50 +43,14 @@
                 $scope.errors["shouldSelectAdvertType"] = "Тип объявления должен быть указан";
 
             switch ($scope.realtyType) {
-                //case "room":
-                //    if (!$scope.roomsCount || $scope.roomsCount == "")
-                //        $scope.warnings["shouldSelectRoomsCount"] = "Укажите количество комнат в квартире";
-
-                //    if (!$scope.stage || $scope.stage == "")
-                //        $scope.warnings["shouldInputStage"] = "Укажите этаж";
-
-                //    if (!$scope.stageCount || $scope.stageCount == "")
-                //        $scope.warnings["shouldInputStagesCount"] = "Укажите количество этажей в доме";
-                //    break;
-
-                //case "apartment":
-                //    if (!$scope.objectType || $scope.objectType == "")
-                //        $scope.warnings["shouldInputObjectType"] = "Укажите тип объекта";
-
-                //    if (!$scope.roomsCount || $scope.roomsCount == "")
-                //        $scope.warnings["shouldInputRooms"] = "Укажите количество комнат";
-
-                //    if (!$scope.stage || $scope.stage == "")
-                //        $scope.warnings["shouldInputStage"] = "Укажите этаж";
-
-                //    if (!$scope.stageCount || $scope.stageCount == "")
-                //        $scope.warnings["shouldInputStagesCount"] = "Укажите количество этажей в доме";
-                //    break;
-
                 case "house":
                     if (!$scope.objectType || $scope.objectType == "")
                         $scope.errors["shouldInputObjectType"] = "Укажите тип объекта";
-
-                    //if (!$scope.square || $scope.square == "")
-                    //    $scope.warnings["shouldInputSquare"] = "Укажите площадь дома";
                     break;
-
-                //case "land":
-                //    if (!$scope.square || $scope.square == "")
-                //        $scope.warnings["shouldInputSquare"] = "Укажите площадь участка";
-                //    break;
 
                 case "garage":
                     if (!$scope.objectType || $scope.objectType == "")
                         $scope.errors["shouldInputObjectType"] = "Укажите вид объекта";
-
-                    //if (!$scope.security || $scope.security == "")
-                    //    $scope.warnings["shouldSelectSecurity"] = "Укажите имеется ли охрана";
                     break;
 
                 case "commercial":
@@ -100,6 +64,10 @@
 
             if (!$scope.cost || $scope.cost == "")
                 $scope.errors["shouldInputCost"] = "Укажите стоимость недвижимости";
+
+            if (!$scope.contactPhone || $scope.contactPhone == "")
+                $scope.errors["shouldInputContactPhone"] = "Телефон должен быть указан";
+
         };
 
         $scope.back = function () {

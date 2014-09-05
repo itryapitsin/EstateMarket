@@ -48,6 +48,12 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ImageResizer">
+      <HintPath>packages\ImageResizer.3.4.3\lib\ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Mvc">
+      <HintPath>packages\ImageResizer.Mvc.3.4.3\lib\ImageResizer.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -195,9 +201,9 @@
     <Compile Include="Infrastructure\VkAuth\VkAuthenticationMiddleware.cs" />
     <Compile Include="Infrastructure\VkAuth\VkAuthenticationOptions.cs" />
     <Compile Include="JsonNetResult.cs" />
-    <Compile Include="Migrations\201409010838460_InitialCreate.cs" />
-    <Compile Include="Migrations\201409010838460_InitialCreate.Designer.cs">
-      <DependentUpon>201409010838460_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201409050908025_InitialCreate.cs" />
+    <Compile Include="Migrations\201409050908025_InitialCreate.Designer.cs">
+      <DependentUpon>201409050908025_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -338,10 +344,11 @@
     <Content Include="Views\Home\Advert\_AdvertList.cshtml" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <Content Include="Views\Home\Advert\_AdvertDetailed.cshtml" />
+    <Content Include="Views\Home\Advert\_ContactPhone.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201409010838460_InitialCreate.resx">
-      <DependentUpon>201409010838460_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201409050908025_InitialCreate.resx">
+      <DependentUpon>201409050908025_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

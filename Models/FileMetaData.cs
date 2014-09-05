@@ -1,17 +1,20 @@
-﻿namespace RealtyStore.Models
+﻿using System;
+using Newtonsoft.Json;
+using RealtyStore.Models.Business;
+
+namespace RealtyStore.Models
 {
     public class FileMetaData
     {
+        [JsonIgnore]
         public int Id { get; set; }
 
         public string Filename { get; set; }
 
-        public string UserId { get; set; }
+        [JsonIgnore]
+        public virtual Advert Advert { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
-
-        public FileMetaDataType Type { get; set; }
-
-        public string HostName { get; set; }
+        [JsonIgnore]
+        public Guid AdvertId { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -32,6 +33,27 @@ namespace RealtyStore.Controllers
             return new JsonNetResult(markers);
         }
 
+        public ActionResult ShowContactPhone(Guid advertId)
+        {
+            try
+            {
+                Response.ContentType = "image/png";
+
+                var advert = AdvertService.GetAdvert(advertId);
+                var bitmap = advert.ContactPhone.ToBitmap();
+                var ms = new MemoryStream();
+                bitmap.Save(ms, ImageFormat.Png);
+
+                Response.BinaryWrite(ms.ToArray());
+
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
+            }
+            catch (ObjectNotFoundException e)
+            {
+                return new HttpNotFoundResult();
+            }
+        }
+
         [HttpPost]
         public ActionResult PublishNewAdvert([AbstractBind(ConcreteTypeParameter = "realtyType", Path = "RealtyStore.Models.Business")]Advert model)
         {
@@ -61,16 +83,15 @@ namespace RealtyStore.Controllers
                 var fileName = Guid.NewGuid().ToString().ToUpper();
 
                 file.SaveAs(path + "\\" + fileName + ext);
-
-                advert.FilesMetaData.Add(new FileMetaData
+                var fileMetaData = new FileMetaData
                 {
-                    Type = FileMetaDataType.Image,
+                    AdvertId = advert.Id,
                     Filename = fileName + ext
-                });
-
+                };
+                AdvertService.Context.FileMetaData.Add(fileMetaData);
                 AdvertService.Context.SaveChanges();
 
-                return new HttpStatusCodeResult(HttpStatusCode.OK);
+                return new JsonNetResult(new {Url = advert.GetPhotoUrl(fileMetaData)});
             }
             catch (ObjectNotFoundException e)
             {

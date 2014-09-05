@@ -193,7 +193,7 @@
                 function (s) {
                     s.loading = true;
                     s.publishButtonLabel = "Добавление...";
-
+                    
                     var advert = {
                         latitude: $scope.gmap.marker.position.A,
                         longitude: $scope.gmap.marker.position.k,
@@ -209,6 +209,7 @@
                         objectType: s.objectType,
 
                         square: s.square,
+                        contactPhone: s.contactPhone
                     };
 
                     $http
@@ -218,11 +219,14 @@
                                 item.url = "/home/uploadimage?advertId=" + result.id;
                             });
 
+                            s.uploader.bind('completeall', function (obj, request, item, response) {
+                                $scope.cancelAddingAdvert();
+                                s.loading = false;
+                                s.publishButtonLabel = "Добавить";
+                            });
+
                             s.uploader.uploadAll();
 
-                            $scope.cancelAddingAdvert();
-                            s.loading = false;
-                            s.publishButtonLabel = "Добавить";
                         })
                         .error(function () {
                             s.message = "Возникла ошибка: неудалось добавить объявление";
@@ -257,9 +261,35 @@
             });
         };
 
+        $scope.currentIndex = 0;
+
+        $scope.setCurrentSlideIndex = function (index) {
+            $scope.currentIndex = index;
+        };
+
+        $scope.isCurrentSlideIndex = function (index) {
+            return $scope.currentIndex === index;
+        };
+
+        $scope.prevSlide = function () {
+            $scope.currentIndex = ($scope.currentIndex < $scope.selectedAdvert.photos.length - 1) ? ++$scope.currentIndex : 0;
+        };
+
+        $scope.nextSlide = function () {
+            $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.selectedAdvert.photos.length - 1;
+        };
+
         $scope.$watch('realtyType', function() {
             delete $scope.objectType;
         });
+
+        //$scope.showContactPhone = function() {
+        //    $http
+        //        .post("/home/showcontactphone", { advertid: $scope.selectedAdvert.id })
+        //        .success(function(result) {
+
+        //        });
+        //};
 
         function loadMarkers(scope) {
             var bounds = $scope.gmap.map.getBounds();

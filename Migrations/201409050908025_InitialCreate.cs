@@ -13,14 +13,32 @@ namespace RealtyStore.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Filename = c.String(),
-                        UserId = c.String(maxLength: 128),
-                        Type = c.Int(nullable: false),
-                        HostName = c.String(),
-                        Advert_Id = c.Guid(),
+                        AdvertId = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
-                .Index(t => t.UserId);
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
+            CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -72,29 +90,6 @@ namespace RealtyStore.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.AspNetUserRoles",
-                c => new
-                    {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
-            
-            CreateTable(
-                "dbo.AspNetRoles",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
-            CreateTable(
                 "dbo.Apartments",
                 c => new
                     {
@@ -107,6 +102,8 @@ namespace RealtyStore.Migrations
                         Latitude = c.Double(nullable: false),
                         Longitude = c.Double(nullable: false),
                         IsActive = c.Boolean(nullable: false),
+                        ContactPhone = c.String(),
+                        Description = c.String(),
                         ObjectType = c.Int(),
                         Rooms = c.Int(),
                         Floor = c.Int(),
@@ -127,6 +124,8 @@ namespace RealtyStore.Migrations
                         Latitude = c.Double(nullable: false),
                         Longitude = c.Double(nullable: false),
                         IsActive = c.Boolean(nullable: false),
+                        ContactPhone = c.String(),
+                        Description = c.String(),
                         ObjectType = c.Int(),
                     })
                 .PrimaryKey(t => t.Id);
@@ -144,6 +143,8 @@ namespace RealtyStore.Migrations
                         Latitude = c.Double(nullable: false),
                         Longitude = c.Double(nullable: false),
                         IsActive = c.Boolean(nullable: false),
+                        ContactPhone = c.String(),
+                        Description = c.String(),
                         ObjectType = c.Int(),
                         HasSecurity = c.Boolean(),
                     })
@@ -162,6 +163,8 @@ namespace RealtyStore.Migrations
                         Latitude = c.Double(nullable: false),
                         Longitude = c.Double(nullable: false),
                         IsActive = c.Boolean(nullable: false),
+                        ContactPhone = c.String(),
+                        Description = c.String(),
                         ObjectType = c.Int(),
                         HouseSquare = c.Single(),
                     })
@@ -180,6 +183,8 @@ namespace RealtyStore.Migrations
                         Latitude = c.Double(nullable: false),
                         Longitude = c.Double(nullable: false),
                         IsActive = c.Boolean(nullable: false),
+                        ContactPhone = c.String(),
+                        Description = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -196,6 +201,8 @@ namespace RealtyStore.Migrations
                         Latitude = c.Double(nullable: false),
                         Longitude = c.Double(nullable: false),
                         IsActive = c.Boolean(nullable: false),
+                        ContactPhone = c.String(),
+                        Description = c.String(),
                         ObjectType = c.Int(),
                         Rooms = c.Int(),
                         Floor = c.Int(),
@@ -207,29 +214,27 @@ namespace RealtyStore.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.FileMetaDatas", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.FileMetaDatas", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropTable("dbo.Rooms");
             DropTable("dbo.Lands");
             DropTable("dbo.Houses");
             DropTable("dbo.Garages");
             DropTable("dbo.Commercials");
             DropTable("dbo.Apartments");
-            DropTable("dbo.AspNetRoles");
-            DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.AspNetRoles");
             DropTable("dbo.FileMetaDatas");
         }
     }

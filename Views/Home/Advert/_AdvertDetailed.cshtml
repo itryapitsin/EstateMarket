@@ -48,6 +48,12 @@
                                 <div class="col-lg-4">Площадь</div>
                                 <div class="col-lg-8">{{square}}</div>
                             </div>
+                            
+                            <div class="row space1" ng-show="selectedAdvert.square != 0">
+                                <div class="col-lg-12">{{description}}</div>
+                            </div>
+                            
+                            
 
                             <div class="row space1">
                                 <div class="col-lg-4">
@@ -57,8 +63,38 @@
                                     {{selectedAdvert.cost | currency}}
                                 </div>
                             </div>
+                            
+                            <div class="row space1">
+                                <div class="col-lg-4">
+                                    Телефон
+                                </div>
+                                <div class="col-lg-8 text-right">
+                                    @*<p ng-click="showContactPhone()">Показать телефон...</p>*@
+                                    <img ng-src="/home/showcontactphone?advertid={{selectedAdvert.id}}&height=16" />
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-lg-8"></div>
+                        <div class="col-lg-8">
+                            <div class="slider">
+                                <img ng-repeat="photo in selectedAdvert.photos" class="slide" data-ng-src="{{photo}}" data-ng-hide="!isCurrentSlideIndex($index)">
+                                <a class="arrow prev" href="#" ng-click="nextSlide()">
+                                    <i class="glyphicon glyphicon-chevron-left"></i>
+                                </a>
+                                <a class="arrow next" href="#" ng-click="prevSlide()">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>
+                                </a>
+                                <nav class="nav">
+                                    <div class="wrapper">
+                                        <ul class="dots">
+                                            <li class="dot" ng-repeat="photo in selectedAdvert.photos">
+                                                <a href="#" ng-class="{'active':isCurrentSlideIndex($index)}"
+                                                   ng-click="setCurrentSlideIndex($index);">image</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
