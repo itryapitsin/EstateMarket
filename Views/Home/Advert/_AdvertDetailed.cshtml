@@ -18,11 +18,11 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="row space1">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <span class="label label-warning" ng-show="selectedAdvert.advertType == 'sell'">Продажа</span>
                                     <span class="label label-info" ng-show="selectedAdvert.advertType == 'rent'">Аренда</span>
                                 </div>
-                                <div class="col-lg-6  text-right">
+                                <div class="col-lg-8  text-right">
                                     <span ng-show="selectedAdvert.realtyType == 'room'">Комната</span>
                                     <span ng-show="selectedAdvert.realtyType == 'apartment'">Квартира</span>
 
@@ -43,17 +43,35 @@
                                     <span ng-show="selectedAdvert.objectType == 'warehouse'">Складское пом.</span>
                                 </div>
                             </div>
+                            
+                            <div class="row space1" ng-show="selectedAdvert.rooms">
+                                <div class="col-lg-4">Комнат</div>
+                                <div ng-show="selectedAdvert.rooms == 'studio'"  class="col-lg-8 text-right">Студия</div>
+                                <div ng-show="selectedAdvert.rooms == 'one'" class="col-lg-8 text-right">1-комнатная</div>
+                                <div ng-show="selectedAdvert.rooms == 'two'" class="col-lg-8 text-right">2-комнатная</div>
+                                <div ng-show="selectedAdvert.rooms == 'free'" class="col-lg-8 text-right">3-комнатная</div>
+                                <div ng-show="selectedAdvert.rooms == 'four'" class="col-lg-8 text-right">4-комнатная</div>
+                                <div ng-show="selectedAdvert.rooms == 'five'" class="col-lg-8 text-right">5-комнатная</div>
+                                <div ng-show="selectedAdvert.rooms == 'six'" class="col-lg-8 text-right">6-комнатная</div>
+                                <div ng-show="selectedAdvert.rooms == 'seven'" class="col-lg-8 text-right">7-комнатная</div>
+                                <div ng-show="selectedAdvert.rooms == 'eight'" class="col-lg-8 text-right">8-комнатная</div>
+                                <div ng-show="selectedAdvert.rooms == 'moreThatNine'" class="col-lg-8 text-right">Девять и более</div>
+                            </div>
+
+                            <div class="row space1" ng-show="selectedAdvert.floor">
+                                <div class="col-lg-4">Этаж</div>
+                                <div class="col-lg-8 text-right">{{selectedAdvert.floor}}</div>
+                            </div>
+                            
+                            <div class="row space1" ng-show="selectedAdvert.floorCount">
+                                <div class="col-lg-5">Этажей всего</div>
+                                <div class="col-lg-7 text-right">{{selectedAdvert.floorCount}}</div>
+                            </div>
 
                             <div class="row space1" ng-show="selectedAdvert.square != 0">
                                 <div class="col-lg-4">Площадь</div>
-                                <div class="col-lg-8">{{square}}</div>
+                                <div class="col-lg-8 text-right">{{selectedAdvert.square}}</div>
                             </div>
-                            
-                            <div class="row space1" ng-show="selectedAdvert.square != 0">
-                                <div class="col-lg-12">{{description}}</div>
-                            </div>
-                            
-                            
 
                             <div class="row space1">
                                 <div class="col-lg-4">
@@ -64,18 +82,25 @@
                                 </div>
                             </div>
                             
-                            <div class="row space1">
+                            <div class="row space2">
                                 <div class="col-lg-4">
                                     Телефон
                                 </div>
                                 <div class="col-lg-8 text-right">
-                                    @*<p ng-click="showContactPhone()">Показать телефон...</p>*@
                                     <img ng-src="/home/showcontactphone?advertid={{selectedAdvert.id}}&height=16" />
+                                </div>
+                            </div>
+
+                            <div class="row space1" ng-show="selectedAdvert.description">
+                                <div class="col-lg-12">
+                                    <p>Описание</p>
+                                    {{selectedAdvert.description}}
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-8">
-                            <div class="slider">
+                            <img src="/Content/images/defaulthouse.jpg?width=570&height=352" ng-hide="selectedAdvert.photos.length > 0" />
+                            <div class="slider" ng-show="selectedAdvert.photos.length > 0">
                                 <img ng-repeat="photo in selectedAdvert.photos" class="slide" data-ng-src="{{photo}}" data-ng-hide="!isCurrentSlideIndex($index)">
                                 <a class="arrow prev" href="#" ng-click="nextSlide()">
                                     <i class="glyphicon glyphicon-chevron-left"></i>

@@ -120,5 +120,27 @@
             return count > 0;
         };
 
+        var phones = [
+            { "mask": "+#(###) ###-##-##" },
+           //{ "mask": "##-##-##" },
+        ];
+
+        $scope.phoneRegex = {
+            mask: phones,
+            definitions: {
+                '#': {
+                    validator: "[0-9]",
+                    cardinality: 1
+                }
+            }
+        };
+
+        $scope.integerOptions = {
+            autoGroup: true,
+            groupSeparator: ",",
+            groupSize: 3,
+            rightAlign: false
+        };
+
     }
 ]);

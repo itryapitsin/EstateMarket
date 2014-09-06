@@ -199,7 +199,7 @@
                         longitude: $scope.gmap.marker.position.k,
                         realtyType: s.realtyType,
                         advertType: s.advertType,
-                        cost: s.cost,
+                        cost: s.cost.replace(',', ''),
                         description: s.description,
 
                         floor: s.stage,
@@ -226,6 +226,9 @@
                             });
 
                             s.uploader.uploadAll();
+
+                            if (s.uploader.queue.length == 0)
+                                s.uploader.trigger('completeall');
 
                         })
                         .error(function () {
