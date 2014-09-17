@@ -70,7 +70,11 @@
 
                             <div class="row space1" ng-show="selectedAdvert.square != 0">
                                 <div class="col-lg-4">Площадь</div>
-                                <div class="col-lg-8 text-right">{{selectedAdvert.square}}</div>
+                                <div class="col-lg-8 text-right">
+                                    {{selectedAdvert.square}}
+                                    <span ng-show="selectedAdvert.realtyType != 'land'">кв. м.</span>
+                                    <span ng-show="selectedAdvert.realtyType == 'land'">сот.</span>
+                                </div>
                             </div>
 
                             <div class="row space1">

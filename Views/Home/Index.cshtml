@@ -9,31 +9,12 @@
     @Html.Partial("Links\\_Select2")
     @Html.Partial("Links\\_Moment")
 
-    <link rel="stylesheet" href="/content/site.css" />
-    <link rel="stylesheet" href="/content/common.css" />
+    @Styles.Render("~/css")
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/src/markerclusterer.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
 
-    <script src="/scripts/jquery.inputmask.js"></script>
-    <script src="/scripts/jquery.inputmask-multi.js"></script>
-    <script src="/scripts/jquery.inputmask.extensions.js"></script>
-    <script src="/scripts/jquery.inputmask.numeric.extensions.js"></script>
-    <script src="/scripts/from.js"></script>
-
-    <script src="/scripts/loadMap.js"></script>
-    <script src="/scripts/darkMapPallete.js"></script>
-    <script src="/scripts/lightMapPallete.js"></script>
-    <script src="/scripts/angular-file-upload.js"></script>
-    <script src="/scripts/app/app.js"></script>
-    <script src="/scripts/app/directives/inputmask.js"></script>
-    <script src="/scripts/app/directives/with.js"></script>
-    <script src="/scripts/app/directives/ngDivOpenFile.js"></script>
-    <script src="/scripts/app/directives/ngthumbs.js"></script>
-    <script src="/scripts/app/directives/gmap.js"></script>
-    <script src="/scripts/app/controllers/baseController.js"></script>
-    <script src="/scripts/app/controllers/indexController.js"></script>
-    <script src="/scripts/app/controllers/newAdvertController.js"></script>
+    @Scripts.Render("~/js")
 }
 
 <div ng-controller="IndexController">

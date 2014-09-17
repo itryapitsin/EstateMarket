@@ -336,7 +336,7 @@
     <Content Include="Views\Home\Advert\_Cost.cshtml" />
     <Content Include="Views\Home\Advert\_Stage.cshtml" />
     <Content Include="Views\Home\_HouseSquareFilter.cshtml" />
-    <Content Include="Views\Home\Advert\_HouseSquare.cshtml" />
+    <Content Include="Views\Home\Advert\_Square.cshtml" />
     <Content Include="Views\Home\_LocationFilter.cshtml" />
     <Content Include="Views\Home\Advert\_LandSquare.cshtml" />
     <Content Include="Views\Home\Advert\_Description.cshtml" />
