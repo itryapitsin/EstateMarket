@@ -12,7 +12,7 @@
             </a>
         </div>
 
-        <input type="file" id="file-uploader" ng-file-select ng-hide="uploader.isHTML5" />
+        <input type="file" id="file-uploader" multiple="multiple" ng-file-select ng-hide="uploader.isHTML5" />
     </div>
     <div class="row">
         <div ng-repeat="item in uploader.queue" class="col-lg-3 img">

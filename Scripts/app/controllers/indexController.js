@@ -199,7 +199,7 @@
                         longitude: $scope.gmap.marker.position.k,
                         realtyType: s.realtyType,
                         advertType: s.advertType,
-                        cost: s.cost.replace(',', ''),
+                        cost: s.cost.replace(/,/g, ''),
                         description: s.description,
 
                         floor: s.stage,

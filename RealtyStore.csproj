@@ -238,7 +238,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\common.css" />
+    <Content Include="Content\images\defaultHouse.jpg" />
     <Content Include="Content\images\default_house.jpg" />
+    <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\marker-pink.png" />
     <Content Include="Content\images\marker.delete.png" />
     <Content Include="Content\images\marker.png" />
