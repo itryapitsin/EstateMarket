@@ -10,6 +10,7 @@
     @Html.Partial("Links\\_Moment")
 
     @Styles.Render("~/css")
+    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/src/markerclusterer.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
@@ -18,6 +19,10 @@
 }
 
 <div ng-controller="IndexController">
+    <script type="text/ng-template" id="banner.html">
+        @Html.Partial("_Banner")
+    </script>
+
     <div id="mapSidebar" class="nav"></div>
     <div id="mapContainer" ng-gmap="mycity"></div>
     

@@ -16,6 +16,14 @@
     margin-bottom: 20px;
 }
 
+.space3 {
+    margin-bottom: 30px;
+}
+
+.space4 {
+    margin-bottom: 40px;
+}
+
 .delete {
     display: none;
 }
@@ -185,4 +193,13 @@ NAV
 .dots .dot a.active {
     border-color: #a8a8a8;
     background-color: transparent;
+}
+
+.banner h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 72px;
+}
+
+.banner .lead {
+    font-size: 21px;
 }

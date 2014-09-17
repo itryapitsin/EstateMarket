@@ -18,7 +18,7 @@
             var modalPromise = $modal({
                 template: templateUrl,
                 show: false,
-                backdrop: 'static',
+                backdrop: false,
                 animation: 'am-fade-and-scale',
                 scope: self
             });

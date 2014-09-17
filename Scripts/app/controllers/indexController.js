@@ -379,4 +379,6 @@
                 });
 
         }
+
+        $scope.showDialog('banner.html');
     }]);

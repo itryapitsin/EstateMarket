@@ -241,10 +241,12 @@
     <Content Include="Content\images\defaultHouse.jpg" />
     <Content Include="Content\images\default_house.jpg" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logovk.jpg" />
     <Content Include="Content\images\marker-pink.png" />
     <Content Include="Content\images\marker.delete.png" />
     <Content Include="Content\images\marker.png" />
     <Content Include="Content\images\marker.shadow.png" />
+    <Content Include="Content\images\market_flat.png" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -350,6 +352,7 @@
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <Content Include="Views\Home\Advert\_AdvertDetailed.cshtml" />
     <Content Include="Views\Home\Advert\_ContactPhone.cshtml" />
+    <Content Include="Views\Shared\_Banner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201409050908025_InitialCreate.resx">
