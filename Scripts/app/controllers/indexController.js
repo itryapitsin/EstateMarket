@@ -333,6 +333,9 @@
 
                         squareMin: $scope.minSquare,
                         squareMax: $scope.maxSquare,
+
+                        minCost: $scope.minCost,
+                        maxCost: $scope.maxCost
                     }
                 })
                 .success(function (data) {
