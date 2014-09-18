@@ -312,6 +312,10 @@
                 $scope.roomCountFilter = scope.roomsCount;
                 $scope.floorFilter = scope.stage;
                 $scope.floorCountFilter = scope.stageCount;
+                $scope.minSquare = scope.minSquare;
+                $scope.maxSquare = scope.maxSquare;
+                $scope.minCost = scope.minCost;
+                $scope.maxCost = scope.maxCost;
             }
 
             google.maps.event.clearListeners(markerCluster, "click");
