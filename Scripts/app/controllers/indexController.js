@@ -368,15 +368,19 @@
 
                             $timeout(function() {
                                 $scope.selectedAdverts = from(cluster.getMarkers()).select("$extData").toArray();
+                                if (!$scope.selectedAdverts || $scope.selectedAdverts.length == 0)
+                                    $scope.selectedAdvertsAside.hide();
+                                else {
+                                    $scope.selectedAdvertsAside = $aside({
+                                        scope: $scope,
+                                        template: 'advert-list.html',
+                                        placement: 'left',
+                                        backdrop: false
+                                    });
+                                }
                             }, 200);
-                            
-                            $scope.selectedAdvertsAside = $aside({
-                                scope: $scope,
-                                template: 'advert-list.html',
-                                placement: 'left',
-                                backdrop: false
-                            });
                         });
+
                     } catch (e) {
                         console.log(e);
                     }

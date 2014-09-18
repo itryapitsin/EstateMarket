@@ -1,4 +1,4 @@
-﻿<div class="aside am-slide-left" tabindex="-1" role="dialog" style=" box-shadow: 0 0 0 4px rgba(0,0,0, .05);" ng-hide="isAddingAdvert">
+﻿<div class="aside am-slide-left" tabindex="-1" role="dialog" style=" box-shadow: 0 0 0 4px rgba(0,0,0, .05);" ng-hide="isAddingAdvert || selectedAdverts == null">
     <div class="aside-dialog">
         <div class="aside-content">
             <div class="aside-header">
@@ -17,10 +17,10 @@
                         <span ng-show="advert.realtyType == 'room'">Комната</span>
                         <span ng-show="advert.realtyType == 'apartment'">Квартира</span>
                         @*<span ng-show="advert.realtyType == 'house'">Дома, дачи, коттеджи</span>
-                        <span ng-show="advert.realtyType == 'land'">Земельные участки</span>
-                        <span ng-show="advert.realtyType == 'garage'">Гаражи и машиноместа</span>
-                        <span ng-show="advert.realtyType == 'commercial'">Коммерческая недвижимость</span>*@
-                        
+                            <span ng-show="advert.realtyType == 'land'">Земельные участки</span>
+                            <span ng-show="advert.realtyType == 'garage'">Гаражи и машиноместа</span>
+                            <span ng-show="advert.realtyType == 'commercial'">Коммерческая недвижимость</span>*@
+
                         <span ng-show="advert.objectType == 'firstHand'">(новостройка)</span>
                         <span ng-show="advert.objectType == 'secondHand'">(вторичка)</span>
 
@@ -38,14 +38,14 @@
                         <span ng-show="advert.objectType == 'warehouse'">Складское пом.</span>
                     </div>
                 </div>
-                
+
                 <div class="row space1" ng-show="advert.square != 0">
                     <div class="col-lg-6">Площадь</div>
                     <div class="col-lg-6">{{square}}</div>
                 </div>
-                
-                
-                
+
+
+
                 <div class="row space1">
                     <div class="col-lg-4">
                         Цена
@@ -54,7 +54,7 @@
                         {{advert.cost | currency}}
                     </div>
                 </div>
-                
+
                 <div class="row" ng-show="advert.photos && advert.photos.length > 0">
                     <div class="col-lg-6">
                         <i class="glyphicon glyphicon-camera" title="Есть фото">
@@ -63,8 +63,8 @@
                 </div>
             </div>
             @*<div class="aside-footer" style="border-top: 0">
-                <button class="btn btn-success" ng-click="$hide()" data-loading-text="Поиск..." style="width:100%;">Закрыть</button>
-            </div>*@
+                    <button class="btn btn-success" ng-click="$hide()" data-loading-text="Поиск..." style="width:100%;">Закрыть</button>
+                </div>*@
         </div>
     </div>
 </div>
